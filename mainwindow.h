@@ -19,8 +19,7 @@ public:
     ~MainWindow();
     void intervalGen(int interval);
     Ui::MainWindow* ui;
-    QStringList localConfigData = (QStringList() << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0"
-                                    << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0");
+    QStringList localConfigData;
     QSerialPort* port[PORT_NUM];
     int sendCnt[8];
     int recvCnt[8];
@@ -49,8 +48,6 @@ private slots:
 
     void on_btn_clr_72_clicked();
 
-    void on_comboBox_71_currentIndexChanged(int index);
-
     // COM8
     void on_btn_clr_82_clicked();
 
@@ -59,8 +56,6 @@ private slots:
     void on_btn_open_8_clicked();
 
     void on_btn_close_8_clicked();
-
-    void on_comboBox_81_currentIndexChanged(int index);
 
     void on_checkBox_82_clicked();
 
@@ -79,8 +74,6 @@ private slots:
 
     void on_btn_close_5_clicked();
 
-    void on_comboBox_51_currentIndexChanged(int index);
-
     void on_checkBox_52_clicked();
 
     void on_btn_send_5_clicked();
@@ -97,8 +90,6 @@ private slots:
     void on_btn_open_6_clicked();
 
     void on_btn_close_6_clicked();
-
-    void on_comboBox_61_currentIndexChanged(int index);
 
     void on_checkBox_62_clicked();
 
@@ -117,8 +108,6 @@ private slots:
 
     void on_btn_close_4_clicked();
 
-    void on_comboBox_41_currentIndexChanged(int index);
-
     void on_checkBox_42_clicked();
 
     void on_btn_send_4_clicked();
@@ -135,8 +124,6 @@ private slots:
     void on_btn_open_3_clicked();
 
     void on_btn_close_3_clicked();
-
-    void on_comboBox_31_currentIndexChanged(int index);
 
     void on_checkBox_32_clicked();
 
@@ -155,8 +142,6 @@ private slots:
 
     void on_btn_close_2_clicked();
 
-    void on_comboBox_21_currentIndexChanged(int index);
-
     void on_checkBox_22_clicked();
 
     void on_btn_send_2_clicked();
@@ -173,8 +158,6 @@ private slots:
     void on_btn_open_1_clicked();
 
     void on_btn_close_1_clicked();
-
-    void on_comboBox_11_currentIndexChanged(int index);
 
     void on_checkBox_12_clicked();
 

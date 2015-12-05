@@ -6,7 +6,11 @@
 #include <QEventLoop>
 #include <QTimer>
 #include <QMessageBox>
+#include <QFileInfo>
+#include <QCoreApplication>
 #include <QDebug>
+
+int configured_flag = 0;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
         recvCnt[i] = 0;
 
     }
+
+    localConfigData = (QStringList() << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0");
 
     const QStringList lst = (QStringList() << "9600" << "19200" << "38400" << "57600" << "115200");
 
@@ -171,50 +177,54 @@ void MainWindow::recvConfigData(QStringList configData)
     // COM1
     ui->groupBox_11->setTitle(localConfigData[0]);
     ui->groupBox_12->setTitle(localConfigData[0]);
-    ui->comboBox_11->setCurrentIndex(localConfigData[8].toInt());
     ui->comboBox_11->setEnabled(true);
 
     // COM2
     ui->groupBox_21->setTitle(localConfigData[1]);
     ui->groupBox_22->setTitle(localConfigData[1]);
-    ui->comboBox_21->setCurrentIndex(localConfigData[9].toInt());
     ui->comboBox_21->setEnabled(true);
 
     // COM3
     ui->groupBox_31->setTitle(localConfigData[2]);
     ui->groupBox_32->setTitle(localConfigData[2]);
-    ui->comboBox_31->setCurrentIndex(localConfigData[10].toInt());
     ui->comboBox_31->setEnabled(true);
 
     // COM4
     ui->groupBox_41->setTitle(localConfigData[3]);
     ui->groupBox_42->setTitle(localConfigData[3]);
-    ui->comboBox_41->setCurrentIndex(localConfigData[11].toInt());
     ui->comboBox_41->setEnabled(true);
 
     // COM5
     ui->groupBox_51->setTitle(localConfigData[4]);
     ui->groupBox_52->setTitle(localConfigData[4]);
-    ui->comboBox_51->setCurrentIndex(localConfigData[12].toInt());
     ui->comboBox_51->setEnabled(true);
 
     // COM6
     ui->groupBox_61->setTitle(localConfigData[5]);
     ui->groupBox_62->setTitle(localConfigData[5]);
-    ui->comboBox_61->setCurrentIndex(localConfigData[13].toInt());
     ui->comboBox_61->setEnabled(true);
 
     // COM7
     ui->groupBox_71->setTitle(localConfigData[6]);
     ui->groupBox_72->setTitle(localConfigData[6]);
-    ui->comboBox_71->setCurrentIndex(localConfigData[14].toInt());
     ui->comboBox_71->setEnabled(true);
 
     // COM8
     ui->groupBox_81->setTitle(localConfigData[7]);
     ui->groupBox_82->setTitle(localConfigData[7]);
-    ui->comboBox_81->setCurrentIndex(localConfigData[15].toInt());
     ui->comboBox_81->setEnabled(true);
+
+
+    configured_flag = 1;
+
+    on_btn_close_1_clicked();
+    on_btn_close_2_clicked();
+    on_btn_close_3_clicked();
+    on_btn_close_4_clicked();
+    on_btn_close_5_clicked();
+    on_btn_close_6_clicked();
+    on_btn_close_7_clicked();
+    on_btn_close_8_clicked();
 
 }
 
@@ -363,7 +373,7 @@ void MainWindow::on_btn_send_8_clicked()
 void MainWindow::on_btn_open_1_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -373,7 +383,7 @@ void MainWindow::on_btn_open_1_clicked()
     QString portName = localConfigData[0];
 
     port[0] = new QSerialPort(portName);
-    port[0]->setBaudRate(baudRateLst[localConfigData[8].toInt()]);
+    port[0]->setBaudRate(baudRateLst[ui->comboBox_11->currentIndex()]);
     port[0]->setDataBits(QSerialPort::Data8);
     port[0]->setParity(QSerialPort::NoParity);
     port[0]->setStopBits(QSerialPort::OneStop);
@@ -402,7 +412,7 @@ void MainWindow::on_btn_open_1_clicked()
 void MainWindow::on_btn_open_2_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -412,7 +422,7 @@ void MainWindow::on_btn_open_2_clicked()
     QString portName = localConfigData[1];
 
     port[1] = new QSerialPort(portName);
-    port[1]->setBaudRate(baudRateLst[localConfigData[9].toInt()]);
+    port[1]->setBaudRate(baudRateLst[ui->comboBox_21->currentIndex()]);
     port[1]->setDataBits(QSerialPort::Data8);
     port[1]->setParity(QSerialPort::NoParity);
     port[1]->setStopBits(QSerialPort::OneStop);
@@ -441,7 +451,7 @@ void MainWindow::on_btn_open_2_clicked()
 void MainWindow::on_btn_open_3_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -451,7 +461,7 @@ void MainWindow::on_btn_open_3_clicked()
     QString portName = localConfigData[2];
 
     port[2] = new QSerialPort(portName);
-    port[2]->setBaudRate(baudRateLst[localConfigData[10].toInt()]);
+    port[2]->setBaudRate(baudRateLst[ui->comboBox_31->currentIndex()]);
     port[2]->setDataBits(QSerialPort::Data8);
     port[2]->setParity(QSerialPort::NoParity);
     port[2]->setStopBits(QSerialPort::OneStop);
@@ -480,7 +490,7 @@ void MainWindow::on_btn_open_3_clicked()
 void MainWindow::on_btn_open_4_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -490,7 +500,7 @@ void MainWindow::on_btn_open_4_clicked()
     QString portName = localConfigData[3];
 
     port[3] = new QSerialPort(portName);
-    port[3]->setBaudRate(baudRateLst[localConfigData[11].toInt()]);
+    port[3]->setBaudRate(baudRateLst[ui->comboBox_41->currentIndex()]);
     port[3]->setDataBits(QSerialPort::Data8);
     port[3]->setParity(QSerialPort::NoParity);
     port[3]->setStopBits(QSerialPort::OneStop);
@@ -519,7 +529,7 @@ void MainWindow::on_btn_open_4_clicked()
 void MainWindow::on_btn_open_5_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -529,7 +539,7 @@ void MainWindow::on_btn_open_5_clicked()
     QString portName = localConfigData[4];
 
     port[4] = new QSerialPort(portName);
-    port[4]->setBaudRate(baudRateLst[localConfigData[12].toInt()]);
+    port[4]->setBaudRate(baudRateLst[ui->comboBox_51->currentIndex()]);
     port[4]->setDataBits(QSerialPort::Data8);
     port[4]->setParity(QSerialPort::NoParity);
     port[4]->setStopBits(QSerialPort::OneStop);
@@ -558,7 +568,7 @@ void MainWindow::on_btn_open_5_clicked()
 void MainWindow::on_btn_open_6_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -568,7 +578,7 @@ void MainWindow::on_btn_open_6_clicked()
     QString portName = localConfigData[5];
 
     port[5] = new QSerialPort(portName);
-    port[5]->setBaudRate(baudRateLst[localConfigData[13].toInt()]);
+    port[5]->setBaudRate(baudRateLst[ui->comboBox_61->currentIndex()]);
     port[5]->setDataBits(QSerialPort::Data8);
     port[5]->setParity(QSerialPort::NoParity);
     port[5]->setStopBits(QSerialPort::OneStop);
@@ -597,7 +607,7 @@ void MainWindow::on_btn_open_6_clicked()
 void MainWindow::on_btn_open_7_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -607,7 +617,7 @@ void MainWindow::on_btn_open_7_clicked()
     QString portName = localConfigData[7-1];
 
     port[6] = new QSerialPort(portName);
-    port[6]->setBaudRate(baudRateLst[localConfigData[7+7].toInt()]);
+    port[6]->setBaudRate(baudRateLst[ui->comboBox_71->currentIndex()]);
     port[6]->setDataBits(QSerialPort::Data8);
     port[6]->setParity(QSerialPort::NoParity);
     port[6]->setStopBits(QSerialPort::OneStop);
@@ -636,7 +646,7 @@ void MainWindow::on_btn_open_7_clicked()
 void MainWindow::on_btn_open_8_clicked()
 {
 
-    if (localConfigData.size() != CONFIG_LIST_SIZE) {
+    if (configured_flag == 0) {
 
         QMessageBox::about(NULL, "警告", "请先配置串口");
         return;
@@ -646,7 +656,7 @@ void MainWindow::on_btn_open_8_clicked()
     QString portName = localConfigData[7];
 
     port[7] = new QSerialPort(portName);
-    port[7]->setBaudRate(baudRateLst[localConfigData[15].toInt()]);
+    port[7]->setBaudRate(baudRateLst[ui->comboBox_81->currentIndex()]);
     port[7]->setDataBits(QSerialPort::Data8);
     port[7]->setParity(QSerialPort::NoParity);
     port[7]->setStopBits(QSerialPort::OneStop);
@@ -753,7 +763,7 @@ void MainWindow::readPort8()
 
 void MainWindow::on_btn_close_1_clicked()
 {
-    if (port[0]->isOpen()) {
+    if (port[0] != NULL && port[0]->isOpen()) {
 
         ui->checkBox_12->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -771,7 +781,7 @@ void MainWindow::on_btn_close_1_clicked()
 
 void MainWindow::on_btn_close_2_clicked()
 {
-    if (port[1]->isOpen()) {
+    if (port[1] != NULL && port[1]->isOpen()) {
 
         ui->checkBox_22->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -789,7 +799,7 @@ void MainWindow::on_btn_close_2_clicked()
 
 void MainWindow::on_btn_close_3_clicked()
 {
-    if (port[2]->isOpen()) {
+    if (port[2] != NULL && port[2]->isOpen()) {
 
         ui->checkBox_32->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -807,7 +817,7 @@ void MainWindow::on_btn_close_3_clicked()
 
 void MainWindow::on_btn_close_4_clicked()
 {
-    if (port[3]->isOpen()) {
+    if (port[3] != NULL && port[3]->isOpen()) {
 
         ui->checkBox_42->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -825,7 +835,7 @@ void MainWindow::on_btn_close_4_clicked()
 
 void MainWindow::on_btn_close_5_clicked()
 {
-    if (port[4]->isOpen()) {
+    if (port[4] != NULL && port[4]->isOpen()) {
 
         ui->checkBox_52->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -843,7 +853,7 @@ void MainWindow::on_btn_close_5_clicked()
 
 void MainWindow::on_btn_close_6_clicked()
 {
-    if (port[5]->isOpen()) {
+    if (port[5] != NULL && port[5]->isOpen()) {
 
         ui->checkBox_62->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -861,7 +871,7 @@ void MainWindow::on_btn_close_6_clicked()
 
 void MainWindow::on_btn_close_7_clicked()
 {
-    if (port[6]->isOpen()) {
+    if (port[6] != NULL && port[6]->isOpen()) {
 
         ui->checkBox_72->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -879,7 +889,7 @@ void MainWindow::on_btn_close_7_clicked()
 
 void MainWindow::on_btn_close_8_clicked()
 {
-    if (port[7]->isOpen()) {
+    if (port[7] != NULL && port[7]->isOpen()) {
 
         ui->checkBox_82->setCheckState(Qt::Unchecked);
         intervalGen(100);
@@ -1541,44 +1551,4 @@ void MainWindow::closeEvent(QCloseEvent*)
         port[7]->close();
 
     }
-}
-
-void MainWindow::on_comboBox_11_currentIndexChanged(int index)
-{
-    localConfigData[8] = QString::number(index);
-}
-
-void MainWindow::on_comboBox_21_currentIndexChanged(int index)
-{
-    localConfigData[9] = QString::number(index);
-}
-
-void MainWindow::on_comboBox_31_currentIndexChanged(int index)
-{
-    localConfigData[10] = QString::number(index);
-}
-
-void MainWindow::on_comboBox_41_currentIndexChanged(int index)
-{
-    localConfigData[11] = QString::number(index);
-}
-
-void MainWindow::on_comboBox_51_currentIndexChanged(int index)
-{
-    localConfigData[12] = QString::number(index);
-}
-
-void MainWindow::on_comboBox_61_currentIndexChanged(int index)
-{
-    localConfigData[13] = QString::number(index);
-}
-
-void MainWindow::on_comboBox_71_currentIndexChanged(int index)
-{
-    localConfigData[14] = QString::number(index);
-}
-
-void MainWindow::on_comboBox_81_currentIndexChanged(int index)
-{
-    localConfigData[15] = QString::number(index);
 }

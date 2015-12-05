@@ -1,6 +1,10 @@
 #include "configdialog.h"
 #include "ui_configdialog.h"
 #include <QtSerialPort/QSerialPortInfo>
+#include <QCoreApplication>
+#include <QFile>
+#include <QMessageBox>
+#include <QTextCodec>
 #include <QDebug>
 
 ConfigDialog::ConfigDialog(QWidget *parent) :
@@ -12,15 +16,22 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     QList<QSerialPortInfo> serialPortInfoList = QSerialPortInfo::availablePorts();
 
-    foreach (const QSerialPortInfo &serialPortInfo, serialPortInfoList) {
+    if (serialPortInfoList.size() == 0) {
 
-//        qDebug() << "port " << serialPortInfo.portName();
-//        qDebug() << "location " << serialPortInfo.systemLocation();
-//        qDebug() << "description" << serialPortInfo.description();
-//        qDebug() << "Manufacturer " << serialPortInfo.manufacturer();
+        ui->btn_auto_config->setDisabled(true);
+        ui->btn_ok->setDisabled(true);
+        ui->comboBox11->setDisabled(true);
+        ui->comboBox21->setDisabled(true);
+        ui->comboBox31->setDisabled(true);
+        ui->comboBox41->setDisabled(true);
+        ui->comboBox51->setDisabled(true);
+        ui->comboBox61->setDisabled(true);
+        ui->comboBox71->setDisabled(true);
+        ui->comboBox81->setDisabled(true);
 
-        // only add serial ports belongs to our card
-        //if (serialPortInfo.vendorIdentifier() == 0x00) {
+    } else {
+
+        foreach (const QSerialPortInfo &serialPortInfo, serialPortInfoList) {
 
             ui->comboBox11->addItem(serialPortInfo.portName());
             ui->comboBox21->addItem(serialPortInfo.portName());
@@ -31,33 +42,14 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
             ui->comboBox71->addItem(serialPortInfo.portName());
             ui->comboBox81->addItem(serialPortInfo.portName());
 
-        //}
+        }
     }
-
-
-    InitBaudrateComboBox(ui->comboBox12);
-    InitBaudrateComboBox(ui->comboBox22);
-    InitBaudrateComboBox(ui->comboBox32);
-    InitBaudrateComboBox(ui->comboBox42);
-    InitBaudrateComboBox(ui->comboBox52);
-    InitBaudrateComboBox(ui->comboBox62);
-    InitBaudrateComboBox(ui->comboBox72);
-    InitBaudrateComboBox(ui->comboBox82);
 
 }
 
 ConfigDialog::~ConfigDialog()
 {
     delete ui;
-}
-
-void ConfigDialog::InitBaudrateComboBox(QComboBox* box)
-{
-    box->addItem("9600");
-    box->addItem("19200");
-    box->addItem("38400");
-    box->addItem("57600");
-    box->addItem("115200");
 }
 
 void ConfigDialog::on_btn_ok_clicked()
@@ -73,17 +65,67 @@ void ConfigDialog::on_btn_ok_clicked()
     configData << ui->comboBox71->currentText();
     configData << ui->comboBox81->currentText();
 
-    configData << QString::number(ui->comboBox12->currentIndex());
-    configData << QString::number(ui->comboBox22->currentIndex());
-    configData << QString::number(ui->comboBox32->currentIndex());
-    configData << QString::number(ui->comboBox42->currentIndex());
-    configData << QString::number(ui->comboBox52->currentIndex());
-    configData << QString::number(ui->comboBox62->currentIndex());
-    configData << QString::number(ui->comboBox72->currentIndex());
-    configData << QString::number(ui->comboBox82->currentIndex());
-
     emit sendConfigData(configData);
 
     QDialog::accept();
+
+}
+
+void ConfigDialog::on_btn_auto_config_clicked()
+{
+
+    QString configFilePath = QCoreApplication::applicationDirPath() + "/config.ini";
+    QFile configFile(configFilePath);
+
+    int idx[8];
+    int i=0;
+
+    if (configFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+
+        while (!configFile.atEnd()) {
+
+            QByteArray barr = configFile.readLine().trimmed();
+
+            QString str(barr);
+
+            idx[i] = ui->comboBox11->findText(str);
+
+            if (idx[i] == -1) {
+
+                QMessageBox::about(NULL, "警告", "配置文件读取错误");
+                goto exit;
+
+            }
+
+            i++;
+        }
+
+        if (i != 8) {
+
+            goto exit;
+
+        }
+
+        ui->comboBox11->setCurrentIndex(idx[0]);
+        ui->comboBox21->setCurrentIndex(idx[1]);
+        ui->comboBox31->setCurrentIndex(idx[2]);
+        ui->comboBox41->setCurrentIndex(idx[3]);
+        ui->comboBox51->setCurrentIndex(idx[4]);
+        ui->comboBox61->setCurrentIndex(idx[5]);
+        ui->comboBox71->setCurrentIndex(idx[6]);
+        ui->comboBox81->setCurrentIndex(idx[7]);
+
+        QMessageBox::about(NULL, "通知", "配置文件读取成功");
+
+
+
+    } else {
+
+        QMessageBox::about(NULL, "警告", "配置文件读取错误");
+
+    }
+
+exit:
+    configFile.close();
 
 }

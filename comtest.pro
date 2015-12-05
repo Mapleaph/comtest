@@ -27,3 +27,4 @@ RESOURCES += \
     icon.qrc
 
 RC_FILE = res.rc
+
