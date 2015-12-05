@@ -8,7 +8,7 @@ QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = test
+TARGET = ComTest
 TEMPLATE = app
 
 
@@ -22,3 +22,8 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     configdialog.ui
+
+RESOURCES += \
+    icon.qrc
+
+RC_FILE = res.rc
