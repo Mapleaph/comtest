@@ -49,212 +49,940 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
       <string>Monitor1</string>
      </attribute>
-     <widget class="QTextEdit" name="textEdit_11">
+     <widget class="QGroupBox" name="groupBox_11">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>401</width>
-        <height>161</height>
+        <width>421</width>
+        <height>221</height>
        </rect>
       </property>
-      <property name="readOnly">
-       <bool>true</bool>
+      <property name="title">
+       <string/>
       </property>
+      <widget class="QTextEdit" name="textEdit_11">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>401</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_11">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_11">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QPushButton" name="btn_open_1">
+     <widget class="QGroupBox" name="groupBox_12">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
+        <y>240</y>
+        <width>421</width>
+        <height>191</height>
        </rect>
       </property>
-      <property name="text">
-       <string>打开</string>
+      <property name="title">
+       <string/>
       </property>
+      <widget class="QTextEdit" name="textEdit_12">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>401</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_open_1">
+       <property name="geometry">
+        <rect>
+         <x>255</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>打开</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_send_1">
+       <property name="geometry">
+        <rect>
+         <x>184</x>
+         <y>160</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>单次发送</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_12">
+       <property name="geometry">
+        <rect>
+         <x>107</x>
+         <y>161</y>
+         <width>71</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>循环发送</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>84</x>
+         <y>161</y>
+         <width>21</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ms</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_close_1">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>关闭</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_12">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox_11">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>161</y>
+         <width>71</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_11">
+       <property name="geometry">
+        <rect>
+         <x>55</x>
+         <y>121</y>
+         <width>69</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_13">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>122</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>波特率</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_12">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QTextEdit" name="textEdit_12">
+     <widget class="QGroupBox" name="groupBox_21">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>200</y>
-        <width>401</width>
-        <height>161</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_send_1">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>发送</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_open_2">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>打开</string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="textEdit_22">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>200</y>
-        <width>401</width>
-        <height>161</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_send_2">
-      <property name="geometry">
-       <rect>
-        <x>840</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>发送</string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="textEdit_21">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
+        <x>480</x>
         <y>10</y>
-        <width>401</width>
-        <height>161</height>
+        <width>421</width>
+        <height>221</height>
        </rect>
       </property>
-      <property name="readOnly">
-       <bool>true</bool>
+      <property name="title">
+       <string/>
       </property>
+      <widget class="QTextEdit" name="textEdit_21">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>401</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_21">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_21">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_21">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_22">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>240</y>
+        <width>421</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QTextEdit" name="textEdit_22">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>401</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_open_2">
+       <property name="geometry">
+        <rect>
+         <x>255</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>打开</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_send_2">
+       <property name="geometry">
+        <rect>
+         <x>184</x>
+         <y>160</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>单次发送</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_22">
+       <property name="geometry">
+        <rect>
+         <x>107</x>
+         <y>161</y>
+         <width>71</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>循环发送</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_24">
+       <property name="geometry">
+        <rect>
+         <x>84</x>
+         <y>161</y>
+         <width>21</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ms</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_close_2">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>关闭</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_22">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox_21">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>161</y>
+         <width>71</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_21">
+       <property name="geometry">
+        <rect>
+         <x>55</x>
+         <y>121</y>
+         <width>69</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_23">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>122</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>波特率</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_22">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_22">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
       <string>Monitor2</string>
      </attribute>
-     <widget class="QTextEdit" name="textEdit_41">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>10</y>
-        <width>401</width>
-        <height>161</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_open_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>打开</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_send_4">
-      <property name="geometry">
-       <rect>
-        <x>840</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>发送</string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="textEdit_32">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>200</y>
-        <width>401</width>
-        <height>161</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_send_3">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>发送</string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="textEdit_31">
+     <widget class="QGroupBox" name="groupBox_31">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>401</width>
-        <height>161</height>
+        <width>421</width>
+        <height>221</height>
        </rect>
       </property>
-      <property name="readOnly">
-       <bool>true</bool>
+      <property name="title">
+       <string/>
       </property>
+      <widget class="QTextEdit" name="textEdit_31">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>401</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_31">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_31">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_31">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QPushButton" name="btn_open_4">
+     <widget class="QGroupBox" name="groupBox_32">
       <property name="geometry">
        <rect>
-        <x>520</x>
-        <y>370</y>
-        <width>75</width>
-        <height>23</height>
+        <x>10</x>
+        <y>240</y>
+        <width>421</width>
+        <height>191</height>
        </rect>
       </property>
-      <property name="text">
-       <string>打开</string>
+      <property name="title">
+       <string/>
       </property>
+      <widget class="QTextEdit" name="textEdit_32">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>401</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_open_3">
+       <property name="geometry">
+        <rect>
+         <x>255</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>打开</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_send_3">
+       <property name="geometry">
+        <rect>
+         <x>184</x>
+         <y>160</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>单次发送</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_32">
+       <property name="geometry">
+        <rect>
+         <x>107</x>
+         <y>161</y>
+         <width>71</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>循环发送</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_34">
+       <property name="geometry">
+        <rect>
+         <x>84</x>
+         <y>161</y>
+         <width>21</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ms</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_close_3">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>关闭</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_32">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox_31">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>161</y>
+         <width>71</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_31">
+       <property name="geometry">
+        <rect>
+         <x>55</x>
+         <y>121</y>
+         <width>69</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_33">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>122</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>波特率</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_32">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_32">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QTextEdit" name="textEdit_42">
+     <widget class="QGroupBox" name="groupBox_41">
       <property name="geometry">
        <rect>
-        <x>520</x>
-        <y>200</y>
-        <width>401</width>
-        <height>161</height>
+        <x>480</x>
+        <y>10</y>
+        <width>421</width>
+        <height>221</height>
        </rect>
       </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QTextEdit" name="textEdit_41">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>401</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_41">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_41">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_41">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_42">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>240</y>
+        <width>421</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QTextEdit" name="textEdit_42">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>401</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_open_4">
+       <property name="geometry">
+        <rect>
+         <x>255</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>打开</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_send_4">
+       <property name="geometry">
+        <rect>
+         <x>184</x>
+         <y>160</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>单次发送</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_42">
+       <property name="geometry">
+        <rect>
+         <x>107</x>
+         <y>161</y>
+         <width>71</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>循环发送</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_44">
+       <property name="geometry">
+        <rect>
+         <x>84</x>
+         <y>161</y>
+         <width>21</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ms</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_close_4">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>120</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>关闭</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_clr_42">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>13</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox_41">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>161</y>
+         <width>71</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_41">
+       <property name="geometry">
+        <rect>
+         <x>55</x>
+         <y>121</y>
+         <width>69</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_43">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>122</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>波特率</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_42">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_42">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
@@ -277,7 +1005,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>50</y>
          <width>401</width>
          <height>161</height>
         </rect>
@@ -293,13 +1021,39 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>189</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
        </property>
        <property name="text">
         <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_51">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_51">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
@@ -319,9 +1073,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>40</y>
          <width>401</width>
-         <height>91</height>
+         <height>71</height>
         </rect>
        </property>
        <property name="readOnly">
@@ -331,7 +1085,7 @@
       <widget class="QPushButton" name="btn_open_5">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>255</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -367,7 +1121,7 @@
         <string>循环发送</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_51">
+      <widget class="QLabel" name="label_54">
        <property name="geometry">
         <rect>
          <x>84</x>
@@ -383,7 +1137,7 @@
       <widget class="QPushButton" name="btn_close_5">
        <property name="geometry">
         <rect>
-         <x>220</x>
+         <x>336</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -397,7 +1151,7 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>120</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
@@ -426,7 +1180,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="label_52">
+      <widget class="QLabel" name="label_53">
        <property name="geometry">
         <rect>
          <x>12</x>
@@ -437,6 +1191,32 @@
        </property>
        <property name="text">
         <string>波特率</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_52">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_52">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
@@ -456,7 +1236,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>50</y>
          <width>401</width>
          <height>161</height>
         </rect>
@@ -472,13 +1252,39 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>189</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
        </property>
        <property name="text">
         <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_61">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_61">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
@@ -498,9 +1304,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>40</y>
          <width>401</width>
-         <height>91</height>
+         <height>71</height>
         </rect>
        </property>
        <property name="readOnly">
@@ -510,7 +1316,7 @@
       <widget class="QPushButton" name="btn_open_6">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>255</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -546,7 +1352,7 @@
         <string>循环发送</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_61">
+      <widget class="QLabel" name="label_64">
        <property name="geometry">
         <rect>
          <x>84</x>
@@ -562,7 +1368,7 @@
       <widget class="QPushButton" name="btn_close_6">
        <property name="geometry">
         <rect>
-         <x>220</x>
+         <x>336</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -576,7 +1382,7 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>120</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
@@ -605,7 +1411,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="label_62">
+      <widget class="QLabel" name="label_63">
        <property name="geometry">
         <rect>
          <x>12</x>
@@ -616,6 +1422,32 @@
        </property>
        <property name="text">
         <string>波特率</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_62">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_62">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
@@ -640,9 +1472,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>40</y>
          <width>401</width>
-         <height>161</height>
+         <height>171</height>
         </rect>
        </property>
        <property name="contextMenuPolicy">
@@ -656,13 +1488,39 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>189</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
        </property>
        <property name="text">
         <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_71">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_71">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
@@ -682,9 +1540,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>40</y>
          <width>401</width>
-         <height>91</height>
+         <height>71</height>
         </rect>
        </property>
        <property name="readOnly">
@@ -694,7 +1552,7 @@
       <widget class="QPushButton" name="btn_open_7">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>255</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -730,7 +1588,7 @@
         <string>循环发送</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_72">
+      <widget class="QLabel" name="label_74">
        <property name="geometry">
         <rect>
          <x>84</x>
@@ -746,7 +1604,7 @@
       <widget class="QPushButton" name="btn_close_7">
        <property name="geometry">
         <rect>
-         <x>220</x>
+         <x>336</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -760,7 +1618,7 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>120</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
@@ -789,7 +1647,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="label_71">
+      <widget class="QLabel" name="label_73">
        <property name="geometry">
         <rect>
          <x>12</x>
@@ -800,6 +1658,32 @@
        </property>
        <property name="text">
         <string>波特率</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_72">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_72">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
@@ -819,9 +1703,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>40</y>
          <width>401</width>
-         <height>161</height>
+         <height>171</height>
         </rect>
        </property>
        <property name="readOnly">
@@ -832,13 +1716,39 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>189</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
        </property>
        <property name="text">
         <string>清除数据</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_81">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_81">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
@@ -858,9 +1768,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>40</y>
          <width>401</width>
-         <height>91</height>
+         <height>71</height>
         </rect>
        </property>
        <property name="readOnly">
@@ -884,7 +1794,7 @@
        <property name="geometry">
         <rect>
          <x>336</x>
-         <y>120</y>
+         <y>13</y>
          <width>75</width>
          <height>23</height>
         </rect>
@@ -896,7 +1806,7 @@
       <widget class="QPushButton" name="btn_open_8">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>255</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -906,7 +1816,7 @@
         <string>打开</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_81">
+      <widget class="QLabel" name="label_83">
        <property name="geometry">
         <rect>
          <x>12</x>
@@ -955,7 +1865,7 @@
       <widget class="QPushButton" name="btn_close_8">
        <property name="geometry">
         <rect>
-         <x>220</x>
+         <x>336</x>
          <y>120</y>
          <width>75</width>
          <height>23</height>
@@ -965,7 +1875,7 @@
         <string>关闭</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_82">
+      <widget class="QLabel" name="label_84">
        <property name="geometry">
         <rect>
          <x>84</x>
@@ -976,6 +1886,32 @@
        </property>
        <property name="text">
         <string>ms</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_82">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>18</y>
+         <width>41</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>计数：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cnt_82">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>18</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
        </property>
       </widget>
      </widget>
