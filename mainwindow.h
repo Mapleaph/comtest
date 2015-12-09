@@ -33,11 +33,11 @@ public:
 signals:
     void sigOpen1();
     void sigOpen2();
-    void sigSend1(QString str);
+    void sigSend1(QString str, bool isHex, int sendCnt);
     void sigSend2(QString str);
     void sigClose1();
     void sigClose2();
-    void sigContinueSend1(QString str, int interval, int sendCnt);
+    void sigContinueSend1(QString str, int interval, int sendCnt, bool isHex);
     void sigContinueSend2(QString str, int interval, int sendCnt);
     void sigStopSend();
 

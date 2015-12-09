@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->btn_send_1->setDisabled(true);
     ui->label_cnt_11->setText(QString::number(recvCnt[0]));
     ui->label_cnt_12->setText(QString::number(sendCnt[0]));
+    ui->radio_ascii_11->setChecked(true);
+    ui->radio_ascii_12->setChecked(true);
 
     // COM2
     ui->spinBox_21->setMinimum(TIME_INTERVAL_MIN);
@@ -242,11 +244,11 @@ void MainWindow::on_btn_send_1_clicked()
 
     }
 
-    emit sigSend1(str);
+    emit sigSend1(str, ui->radio_hex_12->isChecked(), sendCnt[0]);
 
     //port[0]->write(str.toLocal8Bit());
 
-    sendCnt[0] += str.size();
+    //sendCnt[0] += str.size();
     ui->label_cnt_12->setText(QString::number(sendCnt[0]));
 
 }
@@ -444,13 +446,13 @@ void MainWindow::on_btn_open_1_clicked()
     connect(thread[0], SIGNAL(finished()), worker[0], SLOT(deleteLater()));
     connect(worker[0], SIGNAL(dataReady()), this, SLOT(handleData()));
     connect(this, SIGNAL(sigOpen1()), worker[0], SLOT(doOpen()));
-    connect(this, SIGNAL(sigSend1(QString)), worker[0], SLOT(doSend(QString)));
+    connect(this, SIGNAL(sigSend1(QString, bool, int)), worker[0], SLOT(doSend(QString, bool, int)));
     connect(this, SIGNAL(sigClose1()), worker[0], SLOT(doClose()));
     connect(worker[0], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi1(QByteArray)));
     connect(ui->textEdit_11, SIGNAL(cursorPositionChanged()), this, SLOT(updateVisibleArea1()));
     connect(worker[0], SIGNAL(sigExitThread()), this, SLOT(exitThread1()));
     connect(worker[0], SIGNAL(sigOpened()), this, SLOT(updateUiOpened1()));
-    connect(this, SIGNAL(sigContinueSend1(QString, int, int)), worker[0], SLOT(doContinueSend(QString, int, int)));
+    connect(this, SIGNAL(sigContinueSend1(QString, int, int, bool)), worker[0], SLOT(doContinueSend(QString, int, int, bool)));
     connect(worker[0], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi1(int)));
     connect(worker[0], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify1()));
     worker[0]->moveToThread(thread[0]);
@@ -984,14 +986,16 @@ void MainWindow::on_checkBox_12_clicked()
     if (ui->checkBox_12->isChecked()) {
 
         str = ui->textEdit_12->toPlainText();
-        emit sigContinueSend1(str, ui->spinBox_11->value(), sendCnt[0]);
-        //sendCnt[0] += str.size();
-        //ui->label_cnt_12->setText(QString::number(sendCnt[0]));
+        emit sigContinueSend1(str, ui->spinBox_11->value(), sendCnt[0], ui->radio_hex_12->isChecked());
 
         ui->btn_send_1->setDisabled(true);
         ui->textEdit_12->setReadOnly(true);
         ui->spinBox_11->setDisabled(true);
         ui->btn_clr_12->setDisabled(true);
+        ui->radio_ascii_11->setDisabled(true);
+        ui->radio_ascii_12->setDisabled(true);
+        ui->radio_hex_11->setDisabled(true);
+        ui->radio_hex_12->setDisabled(true);
 
     } else {
 
@@ -1000,31 +1004,11 @@ void MainWindow::on_checkBox_12_clicked()
         ui->textEdit_12->setReadOnly(false);
         ui->spinBox_11->setDisabled(false);
         ui->btn_clr_12->setDisabled(false);
+        ui->radio_ascii_11->setDisabled(false);
+        ui->radio_ascii_12->setDisabled(false);
+        ui->radio_hex_11->setDisabled(false);
+        ui->radio_hex_12->setDisabled(false);
     }
-
-
-//    for (;;) {
-
-//        if (ui->checkBox_12->isChecked() && port[0]->isOpen()) {
-
-//            str = ui->textEdit_12->toPlainText();
-
-//            port[0]->write(str.toLocal8Bit());
-
-//            sendCnt[0] += str.size();
-//            ui->label_cnt_12->setText(QString::number(sendCnt[0]));
-
-//            intervalGen(ui->spinBox_11->value());
-
-//        } else {
-
-//            ui->textEdit_12->setReadOnly(false);
-//            ui->btn_clr_12->setDisabled(false);
-//            break;
-
-//        }
-
-//    }
 
 }
 
@@ -1646,9 +1630,30 @@ void MainWindow::closeEvent(QCloseEvent*)
 
 void MainWindow::updateReadDataUi1(QByteArray readData)
 {
+
+    if (ui->radio_hex_11->isChecked()) {
+
+        int i = 0;
+
+        readData = readData.toHex();
+
+        while (i < readData.size()) {
+
+            readData.insert(i, " ");
+            i += 3;
+            recvCnt[0]++;
+
+        }
+
+    } else {
+
+        recvCnt[0] += readData.count();
+
+    }
+
     ui->textEdit_11->insertPlainText(readData);
-    recvCnt[0] += readData.count();
     ui->label_cnt_11->setText(QString::number(recvCnt[0]));
+
 }
 
 void MainWindow::updateReadDataUi2(QByteArray readData)

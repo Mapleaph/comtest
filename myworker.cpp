@@ -40,22 +40,91 @@ void MyWorker::doOpen()
 
 }
 
-void MyWorker::doSend(QString str)
+void MyWorker::doSend(QString str, bool isHex, int sendCnt)
 {
-    qDebug() << str;
-    port->write(str.toLocal8Bit());
+
+    QString subStr;
+    int dec;
+    QByteArray sendArr;
+    str = str.replace(" ", "");
+
+    if (isHex) {
+
+        int i = 0;
+
+        while (i+1<str.size()) {
+
+            subStr = str.mid(i, 2);
+
+            dec = subStr.toInt(0, 16);
+
+            qDebug() << QString("%1").arg(dec, 0, 16);
+
+            i = i+2;
+
+        }
+
+        sendCnt += (i != 0) ? (i/2) : 0;
+
+        qDebug() << "HexSend";
+        sendArr =  QByteArray::fromHex(str.toLatin1());
+        port->write(sendArr);
+        emit sigUpdateSendCntUi(sendCnt);
+
+    } else {
+
+        sendCnt += str.size();
+        port->write(str.toLocal8Bit());
+        emit sigUpdateSendCntUi(sendCnt);
+
+    }
+
 }
 
-void MyWorker::doContinueSend(QString str, int interval, int sendCnt)
+void MyWorker::doContinueSend(QString str, int interval, int sendCnt, bool isHex)
 {
     continueFlag = true;
-    qDebug() << "ContinueSend";
-    qDebug() << str;
-    while (continueFlag == true) {
-        port->write(str.toLocal8Bit());
-        sendCnt += str.size();
-        intervalGen(interval);
-        emit sigUpdateSendCntUi(sendCnt);
+
+    str = str.replace(" ", "");
+
+    int i = 0;
+    int dec;
+    QString subStr;
+    QByteArray sendArr;
+
+    if (isHex) {
+
+        while (i+1<str.size()) {
+
+            subStr = str.mid(i, 2);
+
+            dec = subStr.toInt(0, 16);
+
+            //qDebug() << QString("%1").arg(dec, 0, 16);
+
+            i = i+2;
+
+        }
+    }
+
+    while (continueFlag == true) {.
+
+        if (isHex) {
+
+            sendArr =  QByteArray::fromHex(str.toLatin1());
+            port->write(sendArr);
+            sendCnt += (i != 0) ? (i/2) : 0;
+            emit sigUpdateSendCntUi(sendCnt);
+            intervalGen(interval);
+
+        } else {
+
+            port->write(str.toLocal8Bit());
+            sendCnt += str.size();
+            emit sigUpdateSendCntUi(sendCnt);
+            intervalGen(interval);
+
+        }
     }
 }
 
@@ -74,8 +143,10 @@ void MyWorker::setter(QString portName, int baudRate)
 
 void MyWorker::readPort()
 {
+
     QByteArray readData = port->readAll();
     emit sigUpdateReadDataUi(readData);
+
 }
 
 void MyWorker::doClose()

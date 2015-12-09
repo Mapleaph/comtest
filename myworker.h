@@ -21,9 +21,9 @@ public:
 private slots:
     void doOpen();
     void readPort();
-    void doSend(QString str);
+    void doSend(QString str, bool isHex, int sendCnt);
     void doClose();
-    void doContinueSend(QString str, int interval, int sendCnt);
+    void doContinueSend(QString str, int interval, int sendCnt, bool isHex);
 
 signals:
     void dataReady();
