@@ -24,7 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
         port[i] = NULL;
         sendCnt[i] = 0;
         recvCnt[i] = 0;
-
+        worker[i] = NULL;
+        worker2[i] = NULL;
+        thread[i] = NULL;
     }
 
     localConfigData = (QStringList() << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0");
@@ -217,6 +219,7 @@ void MainWindow::recvConfigData(QStringList configData)
 
     configured_flag = 1;
 
+    /*
     on_btn_close_1_clicked();
     on_btn_close_2_clicked();
     on_btn_close_3_clicked();
@@ -225,7 +228,7 @@ void MainWindow::recvConfigData(QStringList configData)
     on_btn_close_6_clicked();
     on_btn_close_7_clicked();
     on_btn_close_8_clicked();
-
+    */
 }
 
 void MainWindow::on_btn_send_1_clicked()
@@ -239,7 +242,9 @@ void MainWindow::on_btn_send_1_clicked()
 
     }
 
-    port[0]->write(str.toLocal8Bit());
+    emit sigSend1(str);
+
+    //port[0]->write(str.toLocal8Bit());
 
     sendCnt[0] += str.size();
     ui->label_cnt_12->setText(QString::number(sendCnt[0]));
@@ -257,7 +262,7 @@ void MainWindow::on_btn_send_2_clicked()
 
     }
 
-    port[1]->write(str.toLocal8Bit());
+    emit sigSend2(str);
 
     sendCnt[1] += str.size();
     ui->label_cnt_22->setText(QString::number(sendCnt[1]));
@@ -370,6 +375,57 @@ void MainWindow::on_btn_send_8_clicked()
 
 }
 
+void MainWindow::handleData()
+{
+
+    qDebug() << "handleData";
+
+}
+
+void MainWindow::updateUiOpened1()
+{
+    ui->btn_open_1->setDisabled(true);
+    ui->comboBox_11->setDisabled(true);
+    ui->btn_close_1->setDisabled(false);
+    ui->spinBox_11->setDisabled(false);
+    ui->checkBox_12->setDisabled(false);
+    ui->btn_send_1->setDisabled(false);
+}
+
+void MainWindow::updateUiOpened2()
+{
+    ui->btn_open_2->setDisabled(true);
+    ui->comboBox_21->setDisabled(true);
+    ui->btn_close_2->setDisabled(false);
+    ui->spinBox_21->setDisabled(false);
+    ui->checkBox_22->setDisabled(false);
+    ui->btn_send_2->setDisabled(false);
+}
+
+void MainWindow::updateSendCntUi1(int cnt)
+{
+    sendCnt[0] = cnt;
+    ui->label_cnt_12->setText(QString::number(sendCnt[0]));
+}
+
+void MainWindow::updateSendCntUi2(int cnt)
+{
+    sendCnt[1] = cnt;
+    ui->label_cnt_22->setText(QString::number(sendCnt[1]));
+}
+
+void MainWindow::cannotOpenNotify1()
+{
+    QMessageBox::about(NULL, "警告", "打开串口失败");
+    emit sigClose1();
+}
+
+void MainWindow::cannotOpenNotify2()
+{
+    QMessageBox::about(NULL, "警告", "打开串口失败");
+    emit sigClose2();
+}
+
 void MainWindow::on_btn_open_1_clicked()
 {
 
@@ -382,30 +438,25 @@ void MainWindow::on_btn_open_1_clicked()
 
     QString portName = localConfigData[0];
 
-    port[0] = new QSerialPort(portName);
-    port[0]->setBaudRate(baudRateLst[ui->comboBox_11->currentIndex()]);
-    port[0]->setDataBits(QSerialPort::Data8);
-    port[0]->setParity(QSerialPort::NoParity);
-    port[0]->setStopBits(QSerialPort::OneStop);
-    port[0]->setFlowControl(QSerialPort::NoFlowControl);
+    worker[0] = new MyWorker();
+    worker[0]->setter(portName, baudRateLst[ui->comboBox_11->currentIndex()]);
+    thread[0] = new QThread();
+    connect(thread[0], SIGNAL(finished()), worker[0], SLOT(deleteLater()));
+    connect(worker[0], SIGNAL(dataReady()), this, SLOT(handleData()));
+    connect(this, SIGNAL(sigOpen1()), worker[0], SLOT(doOpen()));
+    connect(this, SIGNAL(sigSend1(QString)), worker[0], SLOT(doSend(QString)));
+    connect(this, SIGNAL(sigClose1()), worker[0], SLOT(doClose()));
+    connect(worker[0], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi1(QByteArray)));
+    connect(ui->textEdit_11, SIGNAL(cursorPositionChanged()), this, SLOT(updateVisibleArea1()));
+    connect(worker[0], SIGNAL(sigExitThread()), this, SLOT(exitThread1()));
+    connect(worker[0], SIGNAL(sigOpened()), this, SLOT(updateUiOpened1()));
+    connect(this, SIGNAL(sigContinueSend1(QString, int, int)), worker[0], SLOT(doContinueSend(QString, int, int)));
+    connect(worker[0], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi1(int)));
+    connect(worker[0], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify1()));
+    worker[0]->moveToThread(thread[0]);
+    thread[0]->start();
 
-    if (port[0]->open(QIODevice::ReadWrite)) {
-
-        ui->btn_open_1->setDisabled(true);
-        ui->comboBox_11->setDisabled(true);
-        ui->btn_close_1->setDisabled(false);
-        ui->spinBox_11->setDisabled(false);
-        ui->checkBox_12->setDisabled(false);
-        ui->btn_send_1->setDisabled(false);
-
-        connect(port[0], SIGNAL(readyRead()), this, SLOT(readPort1()));
-        connect(ui->textEdit_11, SIGNAL(cursorPositionChanged()), this, SLOT(updateVisibleArea1()));
-
-    } else {
-
-        QMessageBox::about(NULL, "警告", "打开串口失败");
-
-    }
+    emit sigOpen1();
 
 }
 
@@ -421,30 +472,25 @@ void MainWindow::on_btn_open_2_clicked()
 
     QString portName = localConfigData[1];
 
-    port[1] = new QSerialPort(portName);
-    port[1]->setBaudRate(baudRateLst[ui->comboBox_21->currentIndex()]);
-    port[1]->setDataBits(QSerialPort::Data8);
-    port[1]->setParity(QSerialPort::NoParity);
-    port[1]->setStopBits(QSerialPort::OneStop);
-    port[1]->setFlowControl(QSerialPort::NoFlowControl);
+    worker2[1] = new MyWorker2();
+    worker2[1]->setter(portName, baudRateLst[ui->comboBox_21->currentIndex()]);
+    thread[1] = new QThread();
+    connect(thread[1], SIGNAL(finished()), worker2[1], SLOT(deleteLater()));
+    connect(worker2[1], SIGNAL(dataReady()), this, SLOT(handleData()));
+    connect(worker2[1], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi2(QByteArray)));
+    connect(worker2[1], SIGNAL(sigExitThread()), this, SLOT(exitThread2()));
+    connect(worker2[1], SIGNAL(sigOpened()), this, SLOT(updateUiOpened2()));
+    connect(this, SIGNAL(sigOpen2()), worker2[1], SLOT(doOpen()));
+    connect(this, SIGNAL(sigSend2(QString)), worker2[1], SLOT(doSend(QString)));
+    connect(this, SIGNAL(sigClose2()), worker2[1], SLOT(doClose()));
+    connect(this, SIGNAL(sigContinueSend2(QString, int, int)), worker2[1], SLOT(doContinueSend(QString, int, int)));
+    connect(ui->textEdit_21, SIGNAL(cursorPositionChanged()), this, SLOT(updateVisibleArea2()));
+    connect(worker2[1], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi2(int)));
+    connect(worker2[1], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify2()));
+    worker2[1]->moveToThread(thread[1]);
+    thread[1]->start();
 
-    if (port[1]->open(QIODevice::ReadWrite)) {
-
-        ui->btn_open_2->setDisabled(true);
-        ui->comboBox_21->setDisabled(true);
-        ui->btn_close_2->setDisabled(false);
-        ui->spinBox_21->setDisabled(false);
-        ui->checkBox_22->setDisabled(false);
-        ui->btn_send_2->setDisabled(false);
-
-        connect(port[1], SIGNAL(readyRead()), this, SLOT(readPort2()));
-        connect(ui->textEdit_21, SIGNAL(cursorPositionChanged()), this, SLOT(updateVisibleArea2()));
-
-    } else {
-
-        QMessageBox::about(NULL, "警告", "打开串口失败");
-
-    }
+    emit sigOpen2();
 
 }
 
@@ -761,14 +807,29 @@ void MainWindow::readPort8()
 
 }
 
+void MainWindow::exitThread1()
+{
+    thread[0]->exit();
+    thread[0]->wait();
+}
+
+void MainWindow::exitThread2()
+{
+    thread[1]->exit();
+    thread[1]->wait();
+}
+
 void MainWindow::on_btn_close_1_clicked()
 {
-    if (port[0] != NULL && port[0]->isOpen()) {
+    //if (port[0] != NULL && port[0]->isOpen()) {
 
         ui->checkBox_12->setCheckState(Qt::Unchecked);
         intervalGen(100);
 
-        port[0]->close();
+        qDebug() << "mainclose";
+        worker[0]->continueFlag = false;
+        emit sigClose1();
+
 
         ui->btn_open_1->setDisabled(false);
         ui->btn_close_1->setEnabled(false);
@@ -776,17 +837,19 @@ void MainWindow::on_btn_close_1_clicked()
         ui->spinBox_11->setDisabled(true);
         ui->checkBox_12->setDisabled(true);
         ui->btn_send_1->setDisabled(true);
-    }
+    //}
 }
 
 void MainWindow::on_btn_close_2_clicked()
 {
-    if (port[1] != NULL && port[1]->isOpen()) {
+    //if (port[1] != NULL && port[1]->isOpen()) {
 
         ui->checkBox_22->setCheckState(Qt::Unchecked);
         intervalGen(100);
 
-        port[1]->close();
+        qDebug() << "mainclose";
+        worker2[1]->continueFlag = false;
+        emit sigClose2();
 
         ui->btn_open_2->setDisabled(false);
         ui->btn_close_2->setEnabled(false);
@@ -794,7 +857,7 @@ void MainWindow::on_btn_close_2_clicked()
         ui->spinBox_21->setDisabled(true);
         ui->checkBox_22->setDisabled(true);
         ui->btn_send_2->setDisabled(true);
-    }
+    //}
 }
 
 void MainWindow::on_btn_close_3_clicked()
@@ -920,6 +983,11 @@ void MainWindow::on_checkBox_12_clicked()
 
     if (ui->checkBox_12->isChecked()) {
 
+        str = ui->textEdit_12->toPlainText();
+        emit sigContinueSend1(str, ui->spinBox_11->value(), sendCnt[0]);
+        //sendCnt[0] += str.size();
+        //ui->label_cnt_12->setText(QString::number(sendCnt[0]));
+
         ui->btn_send_1->setDisabled(true);
         ui->textEdit_12->setReadOnly(true);
         ui->spinBox_11->setDisabled(true);
@@ -927,34 +995,36 @@ void MainWindow::on_checkBox_12_clicked()
 
     } else {
 
+        worker[0]->continueFlag = false;
         ui->btn_send_1->setEnabled(true);
         ui->textEdit_12->setReadOnly(false);
         ui->spinBox_11->setDisabled(false);
         ui->btn_clr_12->setDisabled(false);
     }
 
-    for (;;) {
 
-        if (ui->checkBox_12->isChecked() && port[0]->isOpen()) {
+//    for (;;) {
 
-            str = ui->textEdit_12->toPlainText();
+//        if (ui->checkBox_12->isChecked() && port[0]->isOpen()) {
 
-            port[0]->write(str.toLocal8Bit());
+//            str = ui->textEdit_12->toPlainText();
 
-            sendCnt[0] += str.size();
-            ui->label_cnt_12->setText(QString::number(sendCnt[0]));
+//            port[0]->write(str.toLocal8Bit());
 
-            intervalGen(ui->spinBox_11->value());
+//            sendCnt[0] += str.size();
+//            ui->label_cnt_12->setText(QString::number(sendCnt[0]));
 
-        } else {
+//            intervalGen(ui->spinBox_11->value());
 
-            ui->textEdit_12->setReadOnly(false);
-            ui->btn_clr_12->setDisabled(false);
-            break;
+//        } else {
 
-        }
+//            ui->textEdit_12->setReadOnly(false);
+//            ui->btn_clr_12->setDisabled(false);
+//            break;
 
-    }
+//        }
+
+//    }
 
 }
 
@@ -973,6 +1043,11 @@ void MainWindow::on_checkBox_22_clicked()
 
     if (ui->checkBox_22->isChecked()) {
 
+        str = ui->textEdit_22->toPlainText();
+        emit sigContinueSend2(str, ui->spinBox_21->value(), sendCnt[1]);
+        //sendCnt[1] += str.size();
+        //ui->label_cnt_22->setText(QString::number(sendCnt[1]));
+
         ui->btn_send_2->setDisabled(true);
         ui->textEdit_22->setReadOnly(true);
         ui->spinBox_21->setDisabled(true);
@@ -980,12 +1055,14 @@ void MainWindow::on_checkBox_22_clicked()
 
     } else {
 
+        worker2[1]->continueFlag = false;
         ui->btn_send_2->setEnabled(true);
         ui->textEdit_22->setReadOnly(false);
         ui->spinBox_21->setDisabled(false);
         ui->btn_clr_22->setDisabled(false);
     }
 
+/*
     for (;;) {
 
         if (ui->checkBox_22->isChecked() && port[1]->isOpen()) {
@@ -1008,7 +1085,7 @@ void MainWindow::on_checkBox_22_clicked()
         }
 
     }
-
+*/
 }
 
 void MainWindow::on_checkBox_32_clicked()
@@ -1492,6 +1569,20 @@ void MainWindow::updateVisibleArea8()
 void MainWindow::closeEvent(QCloseEvent*)
 {
 
+    // COM1
+    if (worker[0] != NULL && thread[0] != NULL) {
+
+        worker[0]->continueFlag = false;
+        emit sigClose1();
+    }
+
+    // COM2
+    if (worker2[1] != NULL && thread[1] != NULL) {
+
+        worker2[1]->continueFlag = false;
+        emit sigClose2();
+    }
+
     // COM3
     if (port[2] != NULL && port[2]->isOpen()) {
 
@@ -1551,4 +1642,18 @@ void MainWindow::closeEvent(QCloseEvent*)
         port[7]->close();
 
     }
+}
+
+void MainWindow::updateReadDataUi1(QByteArray readData)
+{
+    ui->textEdit_11->insertPlainText(readData);
+    recvCnt[0] += readData.count();
+    ui->label_cnt_11->setText(QString::number(recvCnt[0]));
+}
+
+void MainWindow::updateReadDataUi2(QByteArray readData)
+{
+    ui->textEdit_21->insertPlainText(readData);
+    recvCnt[1] += readData.count();
+    ui->label_cnt_21->setText(QString::number(recvCnt[1]));
 }

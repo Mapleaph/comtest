@@ -2,6 +2,9 @@
 
 #include <QMainWindow>
 #include <QSerialPort>
+#include "myworker.h"
+#include "myworker2.h"
+#include <QThread>
 
 #define PORT_NUM 8
 
@@ -23,14 +26,40 @@ public:
     QSerialPort* port[PORT_NUM];
     int sendCnt[8];
     int recvCnt[8];
+    MyWorker* worker[PORT_NUM];
+    MyWorker2* worker2[PORT_NUM];
+    QThread* thread[PORT_NUM];
+
+signals:
+    void sigOpen1();
+    void sigOpen2();
+    void sigSend1(QString str);
+    void sigSend2(QString str);
+    void sigClose1();
+    void sigClose2();
+    void sigContinueSend1(QString str, int interval, int sendCnt);
+    void sigContinueSend2(QString str, int interval, int sendCnt);
+    void sigStopSend();
 
 private slots:
+
+    void updateReadDataUi1(QByteArray readData);
+    void updateReadDataUi2(QByteArray readData);
+    void updateSendCntUi1(int cnt);
+    void updateSendCntUi2(int cnt);
+    void exitThread1();
+    void exitThread2();
+    void updateUiOpened1();
+    void updateUiOpened2();
     void on_btn_config_clicked();
+    void cannotOpenNotify1();
+    void cannotOpenNotify2();
 
     void recvConfigData(QStringList configData);
 
     void closeEvent(QCloseEvent*);
 
+    void handleData();
     // COM7
     void on_btn_send_7_clicked();
 
