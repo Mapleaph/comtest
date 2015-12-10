@@ -15,14 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     configdialog.cpp \
-    myworker.cpp \
-    myworker2.cpp
+    myworker.cpp
 
 HEADERS  += mainwindow.h \
     configdialog.h \
     ser.h \
-    myworker.h \
-    myworker2.h
+    myworker.h
 
 FORMS    += mainwindow.ui \
     configdialog.ui

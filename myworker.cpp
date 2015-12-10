@@ -43,41 +43,40 @@ void MyWorker::doOpen()
 void MyWorker::doSend(QString str, bool isHex, int sendCnt)
 {
 
-    QString subStr;
-    int dec;
+//    QString subStr;
+//    int dec;
     QByteArray sendArr;
     str = str.replace(" ", "");
 
     if (isHex) {
 
-        int i = 0;
+//        int i = 0;
 
-        while (i+1<str.size()) {
+//        while (i<str.size()) {
 
-            subStr = str.mid(i, 2);
+//            subStr = str.mid(i, 2);
 
-            dec = subStr.toInt(0, 16);
+//            dec = subStr.toInt(0, 16);
 
-            qDebug() << QString("%1").arg(dec, 0, 16);
+//            qDebug() << QString("%1").arg(dec, 0, 16);
 
-            i = i+2;
+//            i = i+2;
 
-        }
+//        }
 
-        sendCnt += (i != 0) ? (i/2) : 0;
-
-        qDebug() << "HexSend";
-        sendArr =  QByteArray::fromHex(str.toLatin1());
+        //sendCnt += (i != 0) ? (i/2) : 0;
+        sendCnt += ceil(str.size()/2.0);
+        sendArr =  QByteArray::fromHex(str.toLocal8Bit());
         port->write(sendArr);
-        emit sigUpdateSendCntUi(sendCnt);
 
     } else {
 
         sendCnt += str.size();
         port->write(str.toLocal8Bit());
-        emit sigUpdateSendCntUi(sendCnt);
 
     }
+
+    emit sigUpdateSendCntUi(sendCnt);
 
 }
 
@@ -87,45 +86,49 @@ void MyWorker::doContinueSend(QString str, int interval, int sendCnt, bool isHex
 
     str = str.replace(" ", "");
 
-    int i = 0;
-    int dec;
-    QString subStr;
+//    int i = 0;
+//    int j = 0;
+//    int dec;
+//    QString subStr;
     QByteArray sendArr;
 
-    if (isHex) {
+//    if (isHex) {
 
-        while (i+1<str.size()) {
+//        while (i+1<str.size()) {
 
-            subStr = str.mid(i, 2);
+//            subStr = str.mid(i, 2);
 
-            dec = subStr.toInt(0, 16);
+//            dec = subStr.toInt(0, 16);
 
-            //qDebug() << QString("%1").arg(dec, 0, 16);
+//            //qDebug() << QString("%1").arg(dec, 0, 16);
 
-            i = i+2;
+//            i = i+2;
+//            j++;
 
-        }
-    }
+//        }
+//    }
 
-    while (continueFlag == true) {.
+    while (continueFlag == true) {
 
         if (isHex) {
 
-            sendArr =  QByteArray::fromHex(str.toLatin1());
+            sendArr =  QByteArray::fromHex(str.toLocal8Bit());
             port->write(sendArr);
-            sendCnt += (i != 0) ? (i/2) : 0;
-            emit sigUpdateSendCntUi(sendCnt);
-            intervalGen(interval);
+            //sendCnt += (i != 0) ? (i/2) : 0;
+            sendCnt += ceil(str.size()/2.0);
 
         } else {
 
             port->write(str.toLocal8Bit());
             sendCnt += str.size();
-            emit sigUpdateSendCntUi(sendCnt);
-            intervalGen(interval);
 
         }
+
+        emit sigUpdateSendCntUi(sendCnt);
+        intervalGen(interval);
+
     }
+
 }
 
 void MyWorker::intervalGen(int interval)

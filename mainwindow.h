@@ -3,8 +3,10 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include "myworker.h"
-#include "myworker2.h"
 #include <QThread>
+#include <QRadioButton>
+#include <QTextEdit>
+#include <QLabel>
 
 #define PORT_NUM 8
 
@@ -21,24 +23,24 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void intervalGen(int interval);
+    void updateReadDataUi(QRadioButton* btn, QByteArray readData, int *cnt, QTextEdit* edit, QLabel* label);
     Ui::MainWindow* ui;
     QStringList localConfigData;
     QSerialPort* port[PORT_NUM];
     int sendCnt[8];
     int recvCnt[8];
     MyWorker* worker[PORT_NUM];
-    MyWorker2* worker2[PORT_NUM];
     QThread* thread[PORT_NUM];
 
 signals:
     void sigOpen1();
     void sigOpen2();
     void sigSend1(QString str, bool isHex, int sendCnt);
-    void sigSend2(QString str);
+    void sigSend2(QString str, bool isHex, int sendCnt);
     void sigClose1();
     void sigClose2();
     void sigContinueSend1(QString str, int interval, int sendCnt, bool isHex);
-    void sigContinueSend2(QString str, int interval, int sendCnt);
+    void sigContinueSend2(QString str, int interval, int sendCnt, bool isHex);
     void sigStopSend();
 
 private slots:
@@ -67,8 +69,6 @@ private slots:
 
     void on_btn_close_7_clicked();
 
-    void readPort7();
-
     void updateVisibleArea7();
 
     void on_checkBox_72_clicked();
@@ -92,8 +92,6 @@ private slots:
 
     void updateVisibleArea8();
 
-    void readPort8();
-
     // COM5
     void on_btn_clr_52_clicked();
 
@@ -108,8 +106,6 @@ private slots:
     void on_btn_send_5_clicked();
 
     void updateVisibleArea5();
-
-    void readPort5();
 
     // COM6
     void on_btn_clr_62_clicked();
@@ -126,8 +122,6 @@ private slots:
 
     void updateVisibleArea6();
 
-    void readPort6();
-
     // COM4
     void on_btn_clr_42_clicked();
 
@@ -142,8 +136,6 @@ private slots:
     void on_btn_send_4_clicked();
 
     void updateVisibleArea4();
-
-    void readPort4();
 
     // COM3
     void on_btn_clr_32_clicked();
@@ -160,8 +152,6 @@ private slots:
 
     void updateVisibleArea3();
 
-    void readPort3();
-
     // COM2
     void on_btn_clr_22_clicked();
 
@@ -177,8 +167,6 @@ private slots:
 
     void updateVisibleArea2();
 
-    void readPort2();
-
     // COM1
     void on_btn_clr_12_clicked();
 
@@ -193,8 +181,6 @@ private slots:
     void on_btn_send_1_clicked();
 
     void updateVisibleArea1();
-
-    void readPort1();
 
 private:
 

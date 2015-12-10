@@ -356,7 +356,7 @@
         <x>480</x>
         <y>10</y>
         <width>421</width>
-        <height>221</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="title">
@@ -417,12 +417,44 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_ascii_21">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_3</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_hex_21">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_3</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_22">
       <property name="geometry">
        <rect>
         <x>480</x>
-        <y>240</y>
+        <y>270</y>
         <width>421</width>
         <height>191</height>
        </rect>
@@ -579,6 +611,38 @@
        <property name="text">
         <string>0</string>
        </property>
+      </widget>
+      <widget class="QRadioButton" name="radio_hex_22">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_4</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_22">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_4</string>
+       </attribute>
       </widget>
      </widget>
     </widget>
@@ -1989,5 +2053,7 @@
  <buttongroups>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_4"/>
  </buttongroups>
 </ui>
