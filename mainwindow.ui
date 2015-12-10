@@ -656,7 +656,7 @@
         <x>10</x>
         <y>10</y>
         <width>421</width>
-        <height>221</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="title">
@@ -717,12 +717,44 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_ascii_31">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_13</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_hex_31">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_13</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_32">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>240</y>
+        <y>270</y>
         <width>421</width>
         <height>191</height>
        </rect>
@@ -880,6 +912,38 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_32">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_16</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_32">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_16</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_41">
       <property name="geometry">
@@ -887,7 +951,7 @@
         <x>480</x>
         <y>10</y>
         <width>421</width>
-        <height>221</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="title">
@@ -948,12 +1012,44 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_41">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_14</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_41">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_14</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_42">
       <property name="geometry">
        <rect>
         <x>480</x>
-        <y>240</y>
+        <y>270</y>
         <width>421</width>
         <height>191</height>
        </rect>
@@ -1111,6 +1207,38 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_42">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_15</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_42">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_15</string>
+       </attribute>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
@@ -1123,7 +1251,7 @@
         <x>10</x>
         <y>10</y>
         <width>421</width>
-        <height>221</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="title">
@@ -1184,12 +1312,44 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_51">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_9</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_51">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_9</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_52">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>240</y>
+        <y>270</y>
         <width>421</width>
         <height>191</height>
        </rect>
@@ -1347,6 +1507,38 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_52">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_12</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_52">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_12</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_61">
       <property name="geometry">
@@ -1354,7 +1546,7 @@
         <x>480</x>
         <y>10</y>
         <width>421</width>
-        <height>221</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="title">
@@ -1415,12 +1607,44 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_61">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_10</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_61">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_10</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_62">
       <property name="geometry">
        <rect>
         <x>480</x>
-        <y>240</y>
+        <y>270</y>
         <width>421</width>
         <height>191</height>
        </rect>
@@ -1578,6 +1802,38 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_ascii_62">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_11</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_hex_62">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_11</string>
+       </attribute>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_4">
@@ -1590,7 +1846,7 @@
         <x>10</x>
         <y>10</y>
         <width>421</width>
-        <height>221</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="title">
@@ -1651,12 +1907,44 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_71">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_7</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_71">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_7</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_72">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>240</y>
+        <y>270</y>
         <width>421</width>
         <height>191</height>
        </rect>
@@ -1814,6 +2102,38 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_72">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_8</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_72">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_8</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_81">
       <property name="geometry">
@@ -1821,7 +2141,7 @@
         <x>480</x>
         <y>10</y>
         <width>421</width>
-        <height>221</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="title">
@@ -1879,12 +2199,44 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_hex_81">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_6</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_ascii_81">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>220</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_6</string>
+       </attribute>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_82">
       <property name="geometry">
        <rect>
         <x>480</x>
-        <y>240</y>
+        <y>270</y>
         <width>421</width>
         <height>191</height>
        </rect>
@@ -2042,6 +2394,38 @@
         <string>0</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radio_ascii_82">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_5</string>
+       </attribute>
+      </widget>
+      <widget class="QRadioButton" name="radio_hex_82">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>51</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>HEX</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup_5</string>
+       </attribute>
+      </widget>
      </widget>
     </widget>
    </widget>
@@ -2055,5 +2439,17 @@
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_5"/>
+  <buttongroup name="buttonGroup_6"/>
+  <buttongroup name="buttonGroup_7"/>
+  <buttongroup name="buttonGroup_8"/>
+  <buttongroup name="buttonGroup_9"/>
+  <buttongroup name="buttonGroup_10"/>
+  <buttongroup name="buttonGroup_11"/>
+  <buttongroup name="buttonGroup_12"/>
+  <buttongroup name="buttonGroup_13"/>
+  <buttongroup name="buttonGroup_14"/>
+  <buttongroup name="buttonGroup_15"/>
+  <buttongroup name="buttonGroup_16"/>
  </buttongroups>
 </ui>

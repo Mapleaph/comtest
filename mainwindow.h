@@ -7,6 +7,10 @@
 #include <QRadioButton>
 #include <QTextEdit>
 #include <QLabel>
+#include <QSpinBox>
+#include <QPushButton>
+#include <QCheckBox>
+#include <QComboBox>
 
 #define PORT_NUM 8
 
@@ -24,6 +28,32 @@ public:
     ~MainWindow();
     void intervalGen(int interval);
     void updateReadDataUi(QRadioButton* btn, QByteArray readData, int *cnt, QTextEdit* edit, QLabel* label);
+    void initIntervalSpinBox(QSpinBox* spinBox);
+    void initPortUi(QPushButton* btnOpen,
+                    QPushButton* btnClose,
+                    QSpinBox* spinBox,
+                    QCheckBox* chkBox,
+                    QPushButton* btnSend,
+                    QLabel *cntRecvLb,
+                    int cntRecv,
+                    QLabel *cntSendLb,
+                    int cntSend,
+                    QRadioButton* asciiSend,
+                    QRadioButton* asciiRecv);
+    void updateUiOpened(QPushButton* btnOpen,
+                        QPushButton* btnClose,
+                        QPushButton* btnSend,
+                        QComboBox* comboBox,
+                        QSpinBox* spinBox,
+                        QCheckBox* chkBox
+                        );
+
+    void updateUiClosed(QPushButton* btnOpen,
+                        QPushButton* btnClose,
+                        QPushButton* btnSend,
+                        QSpinBox* spinBox,
+                        QCheckBox* chkBox,
+                        QComboBox* comboBox);
     Ui::MainWindow* ui;
     QStringList localConfigData;
     QSerialPort* port[PORT_NUM];
@@ -35,152 +65,153 @@ public:
 signals:
     void sigOpen1();
     void sigOpen2();
+    void sigOpen3();
+    void sigOpen4();
+    void sigOpen5();
+    void sigOpen6();
+    void sigOpen7();
+    void sigOpen8();
+
     void sigSend1(QString str, bool isHex, int sendCnt);
     void sigSend2(QString str, bool isHex, int sendCnt);
+    void sigSend3(QString str, bool isHex, int sendCnt);
+    void sigSend4(QString str, bool isHex, int sendCnt);
+    void sigSend5(QString str, bool isHex, int sendCnt);
+    void sigSend6(QString str, bool isHex, int sendCnt);
+    void sigSend7(QString str, bool isHex, int sendCnt);
+    void sigSend8(QString str, bool isHex, int sendCnt);
+
     void sigClose1();
     void sigClose2();
+    void sigClose3();
+    void sigClose4();
+    void sigClose5();
+    void sigClose6();
+    void sigClose7();
+    void sigClose8();
+
     void sigContinueSend1(QString str, int interval, int sendCnt, bool isHex);
     void sigContinueSend2(QString str, int interval, int sendCnt, bool isHex);
-    void sigStopSend();
+    void sigContinueSend3(QString str, int interval, int sendCnt, bool isHex);
+    void sigContinueSend4(QString str, int interval, int sendCnt, bool isHex);
+    void sigContinueSend5(QString str, int interval, int sendCnt, bool isHex);
+    void sigContinueSend6(QString str, int interval, int sendCnt, bool isHex);
+    void sigContinueSend7(QString str, int interval, int sendCnt, bool isHex);
+    void sigContinueSend8(QString str, int interval, int sendCnt, bool isHex);
 
 private slots:
 
     void updateReadDataUi1(QByteArray readData);
     void updateReadDataUi2(QByteArray readData);
+    void updateReadDataUi3(QByteArray readData);
+    void updateReadDataUi4(QByteArray readData);
+    void updateReadDataUi5(QByteArray readData);
+    void updateReadDataUi6(QByteArray readData);
+    void updateReadDataUi7(QByteArray readData);
+    void updateReadDataUi8(QByteArray readData);
+
     void updateSendCntUi1(int cnt);
     void updateSendCntUi2(int cnt);
+    void updateSendCntUi3(int cnt);
+    void updateSendCntUi4(int cnt);
+    void updateSendCntUi5(int cnt);
+    void updateSendCntUi6(int cnt);
+    void updateSendCntUi7(int cnt);
+    void updateSendCntUi8(int cnt);
+
     void exitThread1();
     void exitThread2();
+    void exitThread3();
+    void exitThread4();
+    void exitThread5();
+    void exitThread6();
+    void exitThread7();
+    void exitThread8();
+
     void updateUiOpened1();
     void updateUiOpened2();
-    void on_btn_config_clicked();
+    void updateUiOpened3();
+    void updateUiOpened4();
+    void updateUiOpened5();
+    void updateUiOpened6();
+    void updateUiOpened7();
+    void updateUiOpened8();
+
     void cannotOpenNotify1();
     void cannotOpenNotify2();
+    void cannotOpenNotify3();
+    void cannotOpenNotify4();
+    void cannotOpenNotify5();
+    void cannotOpenNotify6();
+    void cannotOpenNotify7();
+    void cannotOpenNotify8();
 
+    void on_btn_config_clicked();
     void recvConfigData(QStringList configData);
-
     void closeEvent(QCloseEvent*);
 
-    void handleData();
     // COM7
+    void on_btn_send_1_clicked();
+    void on_btn_send_2_clicked();
+    void on_btn_send_3_clicked();
+    void on_btn_send_4_clicked();
+    void on_btn_send_5_clicked();
+    void on_btn_send_6_clicked();
     void on_btn_send_7_clicked();
-
-    void on_btn_open_7_clicked();
-
-    void on_btn_close_7_clicked();
-
-    void updateVisibleArea7();
-
-    void on_checkBox_72_clicked();
-
-    void on_btn_clr_71_clicked();
-
-    void on_btn_clr_72_clicked();
-
-    // COM8
-    void on_btn_clr_82_clicked();
-
-    void on_btn_clr_81_clicked();
-
-    void on_btn_open_8_clicked();
-
-    void on_btn_close_8_clicked();
-
-    void on_checkBox_82_clicked();
-
     void on_btn_send_8_clicked();
 
-    void updateVisibleArea8();
-
-    // COM5
-    void on_btn_clr_52_clicked();
-
-    void on_btn_clr_51_clicked();
-
-    void on_btn_open_5_clicked();
-
-    void on_btn_close_5_clicked();
-
-    void on_checkBox_52_clicked();
-
-    void on_btn_send_5_clicked();
-
-    void updateVisibleArea5();
-
-    // COM6
-    void on_btn_clr_62_clicked();
-
-    void on_btn_clr_61_clicked();
-
-    void on_btn_open_6_clicked();
-
-    void on_btn_close_6_clicked();
-
-    void on_checkBox_62_clicked();
-
-    void on_btn_send_6_clicked();
-
-    void updateVisibleArea6();
-
-    // COM4
-    void on_btn_clr_42_clicked();
-
-    void on_btn_clr_41_clicked();
-
-    void on_btn_open_4_clicked();
-
-    void on_btn_close_4_clicked();
-
-    void on_checkBox_42_clicked();
-
-    void on_btn_send_4_clicked();
-
-    void updateVisibleArea4();
-
-    // COM3
-    void on_btn_clr_32_clicked();
-
-    void on_btn_clr_31_clicked();
-
-    void on_btn_open_3_clicked();
-
-    void on_btn_close_3_clicked();
-
-    void on_checkBox_32_clicked();
-
-    void on_btn_send_3_clicked();
-
-    void updateVisibleArea3();
-
-    // COM2
-    void on_btn_clr_22_clicked();
-
-    void on_btn_clr_21_clicked();
-
-    void on_btn_open_2_clicked();
-
-    void on_btn_close_2_clicked();
-
-    void on_checkBox_22_clicked();
-
-    void on_btn_send_2_clicked();
-
-    void updateVisibleArea2();
-
-    // COM1
-    void on_btn_clr_12_clicked();
-
-    void on_btn_clr_11_clicked();
-
     void on_btn_open_1_clicked();
+    void on_btn_open_2_clicked();
+    void on_btn_open_3_clicked();
+    void on_btn_open_4_clicked();
+    void on_btn_open_5_clicked();
+    void on_btn_open_6_clicked();
+    void on_btn_open_7_clicked();
+    void on_btn_open_8_clicked();
 
     void on_btn_close_1_clicked();
-
-    void on_checkBox_12_clicked();
-
-    void on_btn_send_1_clicked();
+    void on_btn_close_2_clicked();
+    void on_btn_close_3_clicked();
+    void on_btn_close_4_clicked();
+    void on_btn_close_5_clicked();
+    void on_btn_close_6_clicked();
+    void on_btn_close_7_clicked();
+    void on_btn_close_8_clicked();
 
     void updateVisibleArea1();
+    void updateVisibleArea2();
+    void updateVisibleArea3();
+    void updateVisibleArea4();
+    void updateVisibleArea5();
+    void updateVisibleArea6();
+    void updateVisibleArea7();
+    void updateVisibleArea8();
+
+    void on_checkBox_12_clicked();
+    void on_checkBox_22_clicked();
+    void on_checkBox_32_clicked();
+    void on_checkBox_42_clicked();
+    void on_checkBox_52_clicked();
+    void on_checkBox_62_clicked();
+    void on_checkBox_72_clicked();
+    void on_checkBox_82_clicked();
+
+    void on_btn_clr_11_clicked();
+    void on_btn_clr_12_clicked();
+    void on_btn_clr_21_clicked();
+    void on_btn_clr_22_clicked();
+    void on_btn_clr_31_clicked();
+    void on_btn_clr_32_clicked();
+    void on_btn_clr_41_clicked();
+    void on_btn_clr_42_clicked();
+    void on_btn_clr_51_clicked();
+    void on_btn_clr_52_clicked();
+    void on_btn_clr_61_clicked();
+    void on_btn_clr_62_clicked();
+    void on_btn_clr_71_clicked();
+    void on_btn_clr_72_clicked();
+    void on_btn_clr_81_clicked();
+    void on_btn_clr_82_clicked();
 
 private:
 
