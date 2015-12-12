@@ -28,7 +28,7 @@ private slots:
 signals:
     void dataReady();
     void sigUpdateReadDataUi(QByteArray readData);
-    void sigUpdateSendCntUi(int sendCnt);
+    void sigUpdateSendCnt(int sendCnt);
     void sigExitThread();
     void sigOpened();
     void sigCannotOpen();

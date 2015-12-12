@@ -129,3 +129,30 @@ exit:
     configFile.close();
 
 }
+
+void ConfigDialog::on_btn_save_config_clicked()
+{
+    QString configFilePath = QCoreApplication::applicationDirPath() + "/config.ini";
+    QFile configFile(configFilePath);
+
+    if (configFile.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text)) {
+
+        configFile.write(ui->comboBox11->currentText().toLatin1() + "\n");
+        configFile.write(ui->comboBox21->currentText().toLatin1() + "\n");
+        configFile.write(ui->comboBox31->currentText().toLatin1() + "\n");
+        configFile.write(ui->comboBox41->currentText().toLatin1() + "\n");
+        configFile.write(ui->comboBox51->currentText().toLatin1() + "\n");
+        configFile.write(ui->comboBox61->currentText().toLatin1() + "\n");
+        configFile.write(ui->comboBox71->currentText().toLatin1() + "\n");
+        configFile.write(ui->comboBox81->currentText().toLatin1());
+
+        configFile.close();
+
+        QMessageBox::about(NULL, "通知", "配置文件写入成功");
+
+    } else {
+
+        QMessageBox::about(NULL, "警告", "配置文件写入失败");
+
+    }
+}

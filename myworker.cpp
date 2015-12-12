@@ -76,7 +76,7 @@ void MyWorker::doSend(QString str, bool isHex, int sendCnt)
 
     }
 
-    emit sigUpdateSendCntUi(sendCnt);
+    emit sigUpdateSendCnt(sendCnt);
 
 }
 
@@ -124,7 +124,7 @@ void MyWorker::doContinueSend(QString str, int interval, int sendCnt, bool isHex
 
         }
 
-        emit sigUpdateSendCntUi(sendCnt);
+        emit sigUpdateSendCnt(sendCnt);
         intervalGen(interval);
 
     }

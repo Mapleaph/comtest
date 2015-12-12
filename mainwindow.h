@@ -13,6 +13,7 @@
 #include <QComboBox>
 
 #define PORT_NUM 8
+#define MAXCHARS 10000
 
 namespace Ui {
 class MainWindow;
@@ -54,6 +55,7 @@ public:
                         QSpinBox* spinBox,
                         QCheckBox* chkBox,
                         QComboBox* comboBox);
+    void limitCharsInTextEdit(const QTextEdit* textEdit, const int maxChars);
     Ui::MainWindow* ui;
     QStringList localConfigData;
     QSerialPort* port[PORT_NUM];
@@ -61,6 +63,8 @@ public:
     int recvCnt[8];
     MyWorker* worker[PORT_NUM];
     QThread* thread[PORT_NUM];
+    QTimer* timer[PORT_NUM];
+    bool openFlag[PORT_NUM];
 
 signals:
     void sigOpen1();
@@ -101,23 +105,41 @@ signals:
 
 private slots:
 
-    void updateReadDataUi1(QByteArray readData);
-    void updateReadDataUi2(QByteArray readData);
-    void updateReadDataUi3(QByteArray readData);
-    void updateReadDataUi4(QByteArray readData);
-    void updateReadDataUi5(QByteArray readData);
-    void updateReadDataUi6(QByteArray readData);
-    void updateReadDataUi7(QByteArray readData);
-    void updateReadDataUi8(QByteArray readData);
+    void updateSendCntUi1();
+    void updateSendCntUi2();
+    void updateSendCntUi3();
+    void updateSendCntUi4();
+    void updateSendCntUi5();
+    void updateSendCntUi6();
+    void updateSendCntUi7();
+    void updateSendCntUi8();
 
-    void updateSendCntUi1(int cnt);
-    void updateSendCntUi2(int cnt);
-    void updateSendCntUi3(int cnt);
-    void updateSendCntUi4(int cnt);
-    void updateSendCntUi5(int cnt);
-    void updateSendCntUi6(int cnt);
-    void updateSendCntUi7(int cnt);
-    void updateSendCntUi8(int cnt);
+    void storeReadData1(QByteArray readData);
+    void storeReadData2(QByteArray readData);
+    void storeReadData3(QByteArray readData);
+    void storeReadData4(QByteArray readData);
+    void storeReadData5(QByteArray readData);
+    void storeReadData6(QByteArray readData);
+    void storeReadData7(QByteArray readData);
+    void storeReadData8(QByteArray readData);
+
+    void updateReadDataUi1();
+    void updateReadDataUi2();
+    void updateReadDataUi3();
+    void updateReadDataUi4();
+    void updateReadDataUi5();
+    void updateReadDataUi6();
+    void updateReadDataUi7();
+    void updateReadDataUi8();
+
+    void updateSendCnt1(int cnt);
+    void updateSendCnt2(int cnt);
+    void updateSendCnt3(int cnt);
+    void updateSendCnt4(int cnt);
+    void updateSendCnt5(int cnt);
+    void updateSendCnt6(int cnt);
+    void updateSendCnt7(int cnt);
+    void updateSendCnt8(int cnt);
 
     void exitThread1();
     void exitThread2();

@@ -11,6 +11,7 @@
 #include <QDebug>
 
 int configured_flag = 0;
+QByteArray tmparr[8];
 
 void MainWindow::initIntervalSpinBox(QSpinBox* spinBox)
 {
@@ -57,7 +58,31 @@ MainWindow::MainWindow(QWidget *parent) :
         recvCnt[i] = 0;
         worker[i] = NULL;
         thread[i] = NULL;
+
+        timer[i] = new QTimer();
+        timer[i]->setInterval(500);
+
+        openFlag[i] = false;
+
     }
+
+    connect(timer[0], SIGNAL(timeout()), this, SLOT(updateReadDataUi1()));
+    connect(timer[1], SIGNAL(timeout()), this, SLOT(updateReadDataUi2()));
+    connect(timer[2], SIGNAL(timeout()), this, SLOT(updateReadDataUi3()));
+    connect(timer[3], SIGNAL(timeout()), this, SLOT(updateReadDataUi4()));
+    connect(timer[4], SIGNAL(timeout()), this, SLOT(updateReadDataUi5()));
+    connect(timer[5], SIGNAL(timeout()), this, SLOT(updateReadDataUi6()));
+    connect(timer[6], SIGNAL(timeout()), this, SLOT(updateReadDataUi7()));
+    connect(timer[7], SIGNAL(timeout()), this, SLOT(updateReadDataUi8()));
+
+    connect(timer[0], SIGNAL(timeout()), this, SLOT(updateSendCntUi1()));
+    connect(timer[1], SIGNAL(timeout()), this, SLOT(updateSendCntUi2()));
+    connect(timer[2], SIGNAL(timeout()), this, SLOT(updateSendCntUi3()));
+    connect(timer[3], SIGNAL(timeout()), this, SLOT(updateSendCntUi4()));
+    connect(timer[4], SIGNAL(timeout()), this, SLOT(updateSendCntUi5()));
+    connect(timer[5], SIGNAL(timeout()), this, SLOT(updateSendCntUi6()));
+    connect(timer[6], SIGNAL(timeout()), this, SLOT(updateSendCntUi7()));
+    connect(timer[7], SIGNAL(timeout()), this, SLOT(updateSendCntUi8()));
 
     localConfigData = (QStringList() << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0");
 
@@ -200,6 +225,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btn_config_clicked()
 {
+
+    for (int i=0; i<PORT_NUM; i++) {
+
+        if (openFlag[i]) {
+
+            QMessageBox::about(NULL, "警告", "请先关闭所有串口再进行配置");
+
+            return;
+        }
+    }
 
     ConfigDialog *configDialog = new ConfigDialog(this);
     connect(configDialog, SIGNAL(sendConfigData(QStringList)), this, SLOT(recvConfigData(QStringList)));
@@ -524,52 +559,86 @@ void MainWindow::updateUiOpened8()
 
 // section updateSendCntUi
 
-void MainWindow::updateSendCntUi1(int cnt)
+void MainWindow::updateSendCntUi1()
 {
-    sendCnt[0] = cnt;
     ui->label_cnt_12->setText(QString::number(sendCnt[0]));
 }
 
-void MainWindow::updateSendCntUi2(int cnt)
+void MainWindow::updateSendCntUi2()
 {
-    sendCnt[1] = cnt;
     ui->label_cnt_22->setText(QString::number(sendCnt[1]));
 }
 
-void MainWindow::updateSendCntUi3(int cnt)
+void MainWindow::updateSendCntUi3()
 {
-    sendCnt[2] = cnt;
     ui->label_cnt_32->setText(QString::number(sendCnt[2]));
 }
 
-void MainWindow::updateSendCntUi4(int cnt)
+void MainWindow::updateSendCntUi4()
 {
-    sendCnt[3] = cnt;
     ui->label_cnt_42->setText(QString::number(sendCnt[3]));
 }
 
-void MainWindow::updateSendCntUi5(int cnt)
+void MainWindow::updateSendCntUi5()
 {
-    sendCnt[4] = cnt;
     ui->label_cnt_52->setText(QString::number(sendCnt[4]));
 }
 
-void MainWindow::updateSendCntUi6(int cnt)
+void MainWindow::updateSendCntUi6()
 {
-    sendCnt[5] = cnt;
     ui->label_cnt_62->setText(QString::number(sendCnt[5]));
 }
 
-void MainWindow::updateSendCntUi7(int cnt)
+void MainWindow::updateSendCntUi7()
 {
-    sendCnt[6] = cnt;
     ui->label_cnt_72->setText(QString::number(sendCnt[6]));
 }
 
-void MainWindow::updateSendCntUi8(int cnt)
+void MainWindow::updateSendCntUi8()
+{
+    ui->label_cnt_82->setText(QString::number(sendCnt[7]));
+}
+
+// section updateSendCntUi end
+
+void MainWindow::updateSendCnt1(int cnt)
+{
+    sendCnt[0] = cnt;
+}
+
+void MainWindow::updateSendCnt2(int cnt)
+{
+    sendCnt[1] = cnt;
+}
+
+void MainWindow::updateSendCnt3(int cnt)
+{
+    sendCnt[2] = cnt;
+}
+
+void MainWindow::updateSendCnt4(int cnt)
+{
+    sendCnt[3] = cnt;
+}
+
+void MainWindow::updateSendCnt5(int cnt)
+{
+    sendCnt[4] = cnt;
+}
+
+void MainWindow::updateSendCnt6(int cnt)
+{
+    sendCnt[5] = cnt;
+}
+
+void MainWindow::updateSendCnt7(int cnt)
+{
+    sendCnt[6] = cnt;
+}
+
+void MainWindow::updateSendCnt8(int cnt)
 {
     sendCnt[7] = cnt;
-    ui->label_cnt_82->setText(QString::number(sendCnt[7]));
 }
 
 // section updateSendCntUi end
@@ -579,48 +648,56 @@ void MainWindow::updateSendCntUi8(int cnt)
 void MainWindow::cannotOpenNotify1()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[0] = false;
     emit sigClose1();
 }
 
 void MainWindow::cannotOpenNotify2()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[1] = false;
     emit sigClose2();
 }
 
 void MainWindow::cannotOpenNotify3()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[2] = false;
     emit sigClose3();
 }
 
 void MainWindow::cannotOpenNotify4()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[3] = false;
     emit sigClose4();
 }
 
 void MainWindow::cannotOpenNotify5()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[4] = false;
     emit sigClose5();
 }
 
 void MainWindow::cannotOpenNotify6()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[5] = false;
     emit sigClose6();
 }
 
 void MainWindow::cannotOpenNotify7()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[6] = false;
     emit sigClose7();
 }
 
 void MainWindow::cannotOpenNotify8()
 {
     QMessageBox::about(NULL, "警告", "打开串口失败");
+    openFlag[7] = false;
     emit sigClose8();
 }
 
@@ -644,11 +721,11 @@ void MainWindow::on_btn_open_1_clicked()
     worker[0]->setter(portName, baudRateLst[ui->comboBox_11->currentIndex()]);
     thread[0] = new QThread();
     connect(thread[0], SIGNAL(finished()), worker[0], SLOT(deleteLater()));
-    connect(worker[0], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi1(int)));
+    connect(worker[0], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt1(int)));
     connect(worker[0], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify1()));
     connect(worker[0], SIGNAL(sigExitThread()), this, SLOT(exitThread1()));
     connect(worker[0], SIGNAL(sigOpened()), this, SLOT(updateUiOpened1()));
-    connect(worker[0], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi1(QByteArray)));
+    connect(worker[0], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData1(QByteArray)));
     connect(this, SIGNAL(sigOpen1()), worker[0], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend1(QString, bool, int)), worker[0], SLOT(doSend(QString, bool, int)));
     connect(this, SIGNAL(sigClose1()), worker[0], SLOT(doClose()));
@@ -658,7 +735,10 @@ void MainWindow::on_btn_open_1_clicked()
     worker[0]->moveToThread(thread[0]);
     thread[0]->start();
 
+    timer[0]->start();
+
     emit sigOpen1();
+    openFlag[0] = true;
 
 }
 
@@ -674,26 +754,31 @@ void MainWindow::on_btn_open_2_clicked()
 
     QString portName = localConfigData[1];
 
-    //worker2[1] = new MyWorker2();
     worker[1] = new MyWorker();
     worker[1]->setter(portName, baudRateLst[ui->comboBox_21->currentIndex()]);
     thread[1] = new QThread();
+    worker[1]->moveToThread(thread[1]);
+    thread[1]->start();
+
     connect(thread[1], SIGNAL(finished()), worker[1], SLOT(deleteLater()));
-    connect(worker[1], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi2(QByteArray)));
+    connect(worker[1], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData2(QByteArray)));
     connect(worker[1], SIGNAL(sigExitThread()), this, SLOT(exitThread2()));
     connect(worker[1], SIGNAL(sigOpened()), this, SLOT(updateUiOpened2()));
+    connect(worker[1], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt2(int)));
+    connect(worker[1], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify2()));
+
     connect(this, SIGNAL(sigOpen2()), worker[1], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend2(QString, bool, int)), worker[1], SLOT(doSend(QString, bool, int)));
     connect(this, SIGNAL(sigClose2()), worker[1], SLOT(doClose()));
     connect(this, SIGNAL(sigContinueSend2(QString, int, int, bool)), worker[1], SLOT(doContinueSend(QString, int, int, bool)));
+
     connect(ui->textEdit_21, SIGNAL(cursorPositionChanged()), this, SLOT(updateVisibleArea2()));
-    connect(worker[1], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi2(int)));
-    connect(worker[1], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify2()));
-    worker[1]->moveToThread(thread[1]);
-    thread[1]->start();
+
+
+    timer[1]->start();
 
     emit sigOpen2();
-
+    openFlag[1] = true;
 }
 
 void MainWindow::on_btn_open_3_clicked()
@@ -712,11 +797,11 @@ void MainWindow::on_btn_open_3_clicked()
     worker[2]->setter(portName, baudRateLst[ui->comboBox_31->currentIndex()]);
     thread[2] = new QThread();
     connect(thread[2], SIGNAL(finished()), worker[2], SLOT(deleteLater()));
-    connect(worker[2], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi3(int)));
+    connect(worker[2], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt3(int)));
     connect(worker[2], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify3()));
     connect(worker[2], SIGNAL(sigExitThread()), this, SLOT(exitThread3()));
     connect(worker[2], SIGNAL(sigOpened()), this, SLOT(updateUiOpened3()));
-    connect(worker[2], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi3(QByteArray)));
+    connect(worker[2], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData3(QByteArray)));
     connect(this, SIGNAL(sigOpen3()), worker[2], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend3(QString, bool, int)), worker[2], SLOT(doSend(QString, bool, int)));
     connect(this, SIGNAL(sigClose3()), worker[2], SLOT(doClose()));
@@ -725,9 +810,9 @@ void MainWindow::on_btn_open_3_clicked()
 
     worker[2]->moveToThread(thread[2]);
     thread[2]->start();
-
+    timer[2]->start();
     emit sigOpen3();
-
+    openFlag[2] = true;
 }
 
 void MainWindow::on_btn_open_4_clicked()
@@ -746,11 +831,11 @@ void MainWindow::on_btn_open_4_clicked()
     worker[3]->setter(portName, baudRateLst[ui->comboBox_41->currentIndex()]);
     thread[3] = new QThread();
     connect(thread[3], SIGNAL(finished()), worker[3], SLOT(deleteLater()));
-    connect(worker[3], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi4(int)));
+    connect(worker[3], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt4(int)));
     connect(worker[3], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify4()));
     connect(worker[3], SIGNAL(sigExitThread()), this, SLOT(exitThread4()));
     connect(worker[3], SIGNAL(sigOpened()), this, SLOT(updateUiOpened4()));
-    connect(worker[3], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi4(QByteArray)));
+    connect(worker[3], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData4(QByteArray)));
     connect(this, SIGNAL(sigOpen4()), worker[3], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend4(QString, bool, int)), worker[3], SLOT(doSend(QString, bool, int)));
     connect(this, SIGNAL(sigClose4()), worker[3], SLOT(doClose()));
@@ -759,9 +844,9 @@ void MainWindow::on_btn_open_4_clicked()
 
     worker[3]->moveToThread(thread[3]);
     thread[3]->start();
-
+    timer[3]->start();
     emit sigOpen4();
-
+    openFlag[3] = true;
 }
 
 void MainWindow::on_btn_open_5_clicked()
@@ -781,11 +866,11 @@ void MainWindow::on_btn_open_5_clicked()
     thread[4] = new QThread();
 
     connect(thread[4], SIGNAL(finished()), worker[4], SLOT(deleteLater()));
-    connect(worker[4], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi5(int)));
+    connect(worker[4], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt5(int)));
     connect(worker[4], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify5()));
     connect(worker[4], SIGNAL(sigExitThread()), this, SLOT(exitThread5()));
     connect(worker[4], SIGNAL(sigOpened()), this, SLOT(updateUiOpened5()));
-    connect(worker[4], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi5(QByteArray)));
+    connect(worker[4], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData5(QByteArray)));
 
     connect(this, SIGNAL(sigOpen5()), worker[4], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend5(QString, bool, int)), worker[4], SLOT(doSend(QString, bool, int)));
@@ -795,9 +880,9 @@ void MainWindow::on_btn_open_5_clicked()
 
     worker[4]->moveToThread(thread[4]);
     thread[4]->start();
-
+    timer[4]->start();
     emit sigOpen5();
-
+    openFlag[4] = true;
 }
 
 void MainWindow::on_btn_open_6_clicked()
@@ -817,11 +902,11 @@ void MainWindow::on_btn_open_6_clicked()
     thread[5] = new QThread();
 
     connect(thread[5], SIGNAL(finished()), worker[5], SLOT(deleteLater()));
-    connect(worker[5], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi6(int)));
+    connect(worker[5], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt6(int)));
     connect(worker[5], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify6()));
     connect(worker[5], SIGNAL(sigExitThread()), this, SLOT(exitThread6()));
     connect(worker[5], SIGNAL(sigOpened()), this, SLOT(updateUiOpened6()));
-    connect(worker[5], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi6(QByteArray)));
+    connect(worker[5], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData6(QByteArray)));
 
     connect(this, SIGNAL(sigOpen6()), worker[5], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend6(QString, bool, int)), worker[5], SLOT(doSend(QString, bool, int)));
@@ -832,8 +917,9 @@ void MainWindow::on_btn_open_6_clicked()
     worker[5]->moveToThread(thread[5]);
     thread[5]->start();
 
+    timer[5]->start();
     emit sigOpen6();
-
+    openFlag[5] = true;
 }
 
 void MainWindow::on_btn_open_7_clicked()
@@ -853,11 +939,11 @@ void MainWindow::on_btn_open_7_clicked()
     thread[6] = new QThread();
 
     connect(thread[6], SIGNAL(finished()), worker[6], SLOT(deleteLater()));
-    connect(worker[6], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi7(int)));
+    connect(worker[6], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt7(int)));
     connect(worker[6], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify7()));
     connect(worker[6], SIGNAL(sigExitThread()), this, SLOT(exitThread7()));
     connect(worker[6], SIGNAL(sigOpened()), this, SLOT(updateUiOpened7()));
-    connect(worker[6], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi7(QByteArray)));
+    connect(worker[6], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData7(QByteArray)));
 
     connect(this, SIGNAL(sigOpen7()), worker[6], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend7(QString, bool, int)), worker[6], SLOT(doSend(QString, bool, int)));
@@ -868,8 +954,9 @@ void MainWindow::on_btn_open_7_clicked()
     worker[6]->moveToThread(thread[6]);
     thread[6]->start();
 
+    timer[6]->start();
     emit sigOpen7();
-
+    openFlag[6] = true;
 }
 
 void MainWindow::on_btn_open_8_clicked()
@@ -889,11 +976,11 @@ void MainWindow::on_btn_open_8_clicked()
     thread[7] = new QThread();
 
     connect(thread[7], SIGNAL(finished()), worker[7], SLOT(deleteLater()));
-    connect(worker[7], SIGNAL(sigUpdateSendCntUi(int)), this, SLOT(updateSendCntUi8(int)));
+    connect(worker[7], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt8(int)));
     connect(worker[7], SIGNAL(sigCannotOpen()), this, SLOT(cannotOpenNotify8()));
     connect(worker[7], SIGNAL(sigExitThread()), this, SLOT(exitThread8()));
     connect(worker[7], SIGNAL(sigOpened()), this, SLOT(updateUiOpened8()));
-    connect(worker[7], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(updateReadDataUi8(QByteArray)));
+    connect(worker[7], SIGNAL(sigUpdateReadDataUi(QByteArray)), this, SLOT(storeReadData8(QByteArray)));
 
     connect(this, SIGNAL(sigOpen8()), worker[7], SLOT(doOpen()));
     connect(this, SIGNAL(sigSend8(QString, bool, int)), worker[7], SLOT(doSend(QString, bool, int)));
@@ -904,8 +991,9 @@ void MainWindow::on_btn_open_8_clicked()
     worker[7]->moveToThread(thread[7]);
     thread[7]->start();
 
+    timer[7]->start();
     emit sigOpen8();
-
+    openFlag[7] = true;
 }
 
 // section btn_open end
@@ -989,6 +1077,9 @@ void MainWindow::on_btn_close_1_clicked()
 
     worker[0]->continueFlag = false;
     emit sigClose1();
+    openFlag[0] = false;
+
+    timer[0]->stop();
 
     updateUiClosed(ui->btn_open_1,
                    ui->btn_close_1,
@@ -1007,6 +1098,8 @@ void MainWindow::on_btn_close_2_clicked()
 
     worker[1]->continueFlag = false;
     emit sigClose2();
+    openFlag[1] = false;
+    timer[1]->stop();
 
     updateUiClosed(ui->btn_open_2,
                    ui->btn_close_2,
@@ -1024,6 +1117,8 @@ void MainWindow::on_btn_close_3_clicked()
 
     worker[2]->continueFlag = false;
     emit sigClose3();
+    openFlag[2] = false;
+    timer[2]->stop();
 
     updateUiClosed(ui->btn_open_3,
                    ui->btn_close_3,
@@ -1041,6 +1136,8 @@ void MainWindow::on_btn_close_4_clicked()
 
     worker[3]->continueFlag = false;
     emit sigClose4();
+    openFlag[3] = false;
+    timer[3]->stop();
 
     updateUiClosed(ui->btn_open_4,
                    ui->btn_close_4,
@@ -1058,6 +1155,8 @@ void MainWindow::on_btn_close_5_clicked()
 
     worker[4]->continueFlag = false;
     emit sigClose5();
+    openFlag[4] = false;
+    timer[4]->stop();
 
     updateUiClosed(ui->btn_open_5,
                    ui->btn_close_5,
@@ -1075,6 +1174,8 @@ void MainWindow::on_btn_close_6_clicked()
 
     worker[5]->continueFlag = false;
     emit sigClose6();
+    openFlag[5] = false;
+    timer[5]->stop();
 
     updateUiClosed(ui->btn_open_6,
                    ui->btn_close_6,
@@ -1092,6 +1193,8 @@ void MainWindow::on_btn_close_7_clicked()
 
     worker[6]->continueFlag = false;
     emit sigClose7();
+    openFlag[6] = false;
+    timer[6]->stop();
 
     updateUiClosed(ui->btn_open_7,
                    ui->btn_close_7,
@@ -1109,6 +1212,8 @@ void MainWindow::on_btn_close_8_clicked()
 
     worker[7]->continueFlag = false;
     emit sigClose8();
+    openFlag[7] = false;
+    timer[7]->stop();
 
     updateUiClosed(ui->btn_open_8,
                    ui->btn_close_8,
@@ -1640,6 +1745,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[0] != NULL && thread[0] != NULL) {
 
         worker[0]->continueFlag = false;
+        timer[0]->stop();
         emit sigClose1();
     }
 
@@ -1647,6 +1753,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[1] != NULL && thread[1] != NULL) {
 
         worker[1]->continueFlag = false;
+        timer[1]->stop();
         emit sigClose2();
     }
 
@@ -1654,6 +1761,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[2] != NULL && thread[2] != NULL) {
 
         worker[2]->continueFlag = false;
+        timer[2]->stop();
         emit sigClose3();
     }
 
@@ -1661,6 +1769,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[3] != NULL && thread[3] != NULL) {
 
         worker[3]->continueFlag = false;
+        timer[3]->stop();
         emit sigClose4();
     }
 
@@ -1668,6 +1777,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[4] != NULL && thread[4] != NULL) {
 
         worker[4]->continueFlag = false;
+        timer[4]->stop();
         emit sigClose5();
     }
 
@@ -1675,6 +1785,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[5] != NULL && thread[5] != NULL) {
 
         worker[5]->continueFlag = false;
+        timer[5]->stop();
         emit sigClose6();
     }
 
@@ -1682,6 +1793,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[6] != NULL && thread[6] != NULL) {
 
         worker[6]->continueFlag = false;
+        timer[6]->stop();
         emit sigClose7();
     }
 
@@ -1689,6 +1801,7 @@ void MainWindow::closeEvent(QCloseEvent*)
     if (worker[7] != NULL && thread[7] != NULL) {
 
         worker[7]->continueFlag = false;
+        timer[7]->stop();
         emit sigClose8();
     }
 
@@ -1696,70 +1809,325 @@ void MainWindow::closeEvent(QCloseEvent*)
 
 // section updateReadDataUi
 
-void MainWindow::updateReadDataUi1(QByteArray readData)
+void MainWindow::storeReadData1(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_11, readData, &recvCnt[0], ui->textEdit_11, ui->label_cnt_11);
+    tmparr[0].append(readData);
 }
 
-void MainWindow::updateReadDataUi2(QByteArray readData)
+void MainWindow::storeReadData2(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_21, readData, &recvCnt[1], ui->textEdit_21, ui->label_cnt_21);
+    tmparr[1].append(readData);
 }
 
-void MainWindow::updateReadDataUi3(QByteArray readData)
+void MainWindow::storeReadData3(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_31, readData, &recvCnt[2], ui->textEdit_31, ui->label_cnt_31);
+    tmparr[2].append(readData);
 }
 
-void MainWindow::updateReadDataUi4(QByteArray readData)
+void MainWindow::storeReadData4(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_41, readData, &recvCnt[3], ui->textEdit_41, ui->label_cnt_41);
+    tmparr[3].append(readData);
 }
 
-void MainWindow::updateReadDataUi5(QByteArray readData)
+void MainWindow::storeReadData5(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_51, readData, &recvCnt[4], ui->textEdit_51, ui->label_cnt_51);
+    tmparr[4].append(readData);
 }
 
-void MainWindow::updateReadDataUi6(QByteArray readData)
+void MainWindow::storeReadData6(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_61, readData, &recvCnt[5], ui->textEdit_61, ui->label_cnt_61);
+    tmparr[5].append(readData);
 }
 
-void MainWindow::updateReadDataUi7(QByteArray readData)
+void MainWindow::storeReadData7(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_71, readData, &recvCnt[6], ui->textEdit_71, ui->label_cnt_71);
+    tmparr[6].append(readData);
 }
 
-void MainWindow::updateReadDataUi8(QByteArray readData)
+void MainWindow::storeReadData8(QByteArray readData)
 {
-    updateReadDataUi(ui->radio_hex_81, readData, &recvCnt[7], ui->textEdit_81, ui->label_cnt_81);
+    tmparr[7].append(readData);
 }
 
-void MainWindow::updateReadDataUi(QRadioButton* btn, QByteArray readData, int* cnt, QTextEdit* edit, QLabel* label)
+// section updateReadDataUi
+
+void MainWindow::updateReadDataUi1()
 {
-    if (btn->isChecked()) {
 
-        int i = 0;
+    if (tmparr[0].count() != 0) {
 
-        readData = readData.toHex();
+        if (ui->radio_hex_11->isChecked()) {
 
-        while (i < readData.size()) {
+            int i = 0;
 
-            readData.insert(i, " ");
-            i += 3;
-            *cnt++;
+            tmparr[0] = tmparr[0].toHex();
+
+            while (i < tmparr[0].size()) {
+
+                tmparr[0].insert(i, " ");
+                i += 3;
+                recvCnt[0]++;
+
+            }
+
+        } else {
+
+            recvCnt[0] += tmparr[0].count();
 
         }
 
-    } else {
-
-        *cnt += readData.count();
-
+        ui->textEdit_11->insertPlainText(tmparr[0]);
+        limitCharsInTextEdit(ui->textEdit_11, MAXCHARS);
+        ui->label_cnt_11->setText(QString::number(recvCnt[0]));
+        tmparr[0].clear();
     }
 
-    edit->insertPlainText(readData);
-    label->setText(QString::number(*cnt));
 }
 
-// sectio updateReadDataUi end
+void MainWindow::updateReadDataUi2()
+{
+
+    if (tmparr[1].count() != 0) {
+
+        if (ui->radio_hex_21->isChecked()) {
+
+            int i = 0;
+
+            tmparr[1] = tmparr[1].toHex();
+
+            while (i < tmparr[1].size()) {
+
+                tmparr[1].insert(i, " ");
+                i += 3;
+                recvCnt[1]++;
+
+            }
+
+        } else {
+
+            recvCnt[1] += tmparr[1].count();
+
+        }
+
+        ui->textEdit_21->insertPlainText(tmparr[1]);
+        limitCharsInTextEdit(ui->textEdit_21, MAXCHARS);
+        ui->label_cnt_21->setText(QString::number(recvCnt[1]));
+        tmparr[1].clear();
+    }
+
+}
+
+void MainWindow::updateReadDataUi3()
+{
+
+    if (tmparr[2].count() != 0) {
+
+        if (ui->radio_hex_31->isChecked()) {
+
+            int i = 0;
+
+            tmparr[2] = tmparr[2].toHex();
+
+            while (i < tmparr[2].size()) {
+
+                tmparr[2].insert(i, " ");
+                i += 3;
+                recvCnt[1]++;
+
+            }
+
+        } else {
+
+            recvCnt[2] += tmparr[2].count();
+
+        }
+
+        ui->textEdit_31->insertPlainText(tmparr[2]);
+        limitCharsInTextEdit(ui->textEdit_31, MAXCHARS);
+        ui->label_cnt_31->setText(QString::number(recvCnt[2]));
+        tmparr[2].clear();
+    }
+
+}
+
+void MainWindow::updateReadDataUi4()
+{
+
+    if (tmparr[3].count() != 0) {
+
+        if (ui->radio_hex_41->isChecked()) {
+
+            int i = 0;
+
+            tmparr[3] = tmparr[3].toHex();
+
+            while (i < tmparr[3].size()) {
+
+                tmparr[3].insert(i, " ");
+                i += 3;
+                recvCnt[3]++;
+
+            }
+
+        } else {
+
+            recvCnt[3] += tmparr[3].count();
+
+        }
+
+        ui->textEdit_41->insertPlainText(tmparr[3]);
+        limitCharsInTextEdit(ui->textEdit_41, MAXCHARS);
+        ui->label_cnt_41->setText(QString::number(recvCnt[3]));
+        tmparr[3].clear();
+    }
+
+}
+
+void MainWindow::updateReadDataUi5()
+{
+
+    if (tmparr[4].count() != 0) {
+
+        if (ui->radio_hex_51->isChecked()) {
+
+            int i = 0;
+
+            tmparr[4] = tmparr[4].toHex();
+
+            while (i < tmparr[4].size()) {
+
+                tmparr[4].insert(i, " ");
+                i += 3;
+                recvCnt[4]++;
+
+            }
+
+        } else {
+
+            recvCnt[4] += tmparr[4].count();
+
+        }
+
+        ui->textEdit_51->insertPlainText(tmparr[4]);
+        limitCharsInTextEdit(ui->textEdit_51, MAXCHARS);
+        ui->label_cnt_51->setText(QString::number(recvCnt[4]));
+        tmparr[4].clear();
+    }
+
+}
+
+void MainWindow::updateReadDataUi6()
+{
+
+    if (tmparr[5].count() != 0) {
+
+        if (ui->radio_hex_61->isChecked()) {
+
+            int i = 0;
+
+            tmparr[5] = tmparr[5].toHex();
+
+            while (i < tmparr[5].size()) {
+
+                tmparr[5].insert(i, " ");
+                i += 3;
+                recvCnt[5]++;
+
+            }
+
+        } else {
+
+            recvCnt[5] += tmparr[5].count();
+
+        }
+
+        ui->textEdit_61->insertPlainText(tmparr[5]);
+        limitCharsInTextEdit(ui->textEdit_61, MAXCHARS);
+        ui->label_cnt_61->setText(QString::number(recvCnt[5]));
+        tmparr[5].clear();
+    }
+
+}
+
+void MainWindow::updateReadDataUi7()
+{
+
+    if (tmparr[6].count() != 0) {
+
+        if (ui->radio_hex_71->isChecked()) {
+
+            int i = 0;
+
+            tmparr[6] = tmparr[6].toHex();
+
+            while (i < tmparr[6].size()) {
+
+                tmparr[6].insert(i, " ");
+                i += 3;
+                recvCnt[6]++;
+
+            }
+
+        } else {
+
+            recvCnt[6] += tmparr[6].count();
+
+        }
+
+        ui->textEdit_71->insertPlainText(tmparr[6]);
+        limitCharsInTextEdit(ui->textEdit_71, MAXCHARS);
+        ui->label_cnt_71->setText(QString::number(recvCnt[6]));
+        tmparr[6].clear();
+    }
+
+}
+
+void MainWindow::updateReadDataUi8()
+{
+
+    if (tmparr[7].count() != 0) {
+
+        if (ui->radio_hex_81->isChecked()) {
+
+            int i = 0;
+
+            tmparr[7] = tmparr[7].toHex();
+
+            while (i < tmparr[7].size()) {
+
+                tmparr[7].insert(i, " ");
+                i += 3;
+                recvCnt[7]++;
+
+            }
+
+        } else {
+
+            recvCnt[7] += tmparr[7].count();
+
+        }
+
+        ui->textEdit_81->insertPlainText(tmparr[7]);
+        limitCharsInTextEdit(ui->textEdit_81, MAXCHARS);
+        ui->label_cnt_81->setText(QString::number(recvCnt[7]));
+        tmparr[7].clear();
+    }
+
+}
+
+// section updateReadDataUi end
+
+void MainWindow::limitCharsInTextEdit(const QTextEdit* textEdit, const int maxChars)
+{
+
+    int currentCount = textEdit->document()->characterCount();
+
+    if(currentCount > (maxChars + (maxChars / 5)))
+    {
+        QTextCursor tc = textEdit->textCursor();
+        tc.setPosition(0);
+        tc.setPosition(currentCount - (maxChars + 1), QTextCursor::KeepAnchor);
+        tc.removeSelectedText();
+        tc.movePosition( QTextCursor::End, QTextCursor::MoveAnchor );
+    }
+}

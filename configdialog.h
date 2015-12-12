@@ -23,6 +23,8 @@ private slots:
 
     void on_btn_auto_config_clicked();
 
+    void on_btn_save_config_clicked();
+
 private:
     Ui::ConfigDialog *ui;
 
