@@ -24,10 +24,10 @@ void MyWorker::doOpen()
     port = new QSerialPort(portName);
 
     port->setBaudRate(baudRate);
-    port->setDataBits(QSerialPort::Data8);
-    port->setParity(QSerialPort::NoParity);
-    port->setStopBits(QSerialPort::OneStop);
-    port->setFlowControl(QSerialPort::NoFlowControl);
+    port->setDataBits(dataBits);
+    port->setParity(parity);
+    port->setStopBits(stopBits);
+    port->setFlowControl(flowCtrl);
 
     if (port->open(QIODevice::ReadWrite)) {
 
@@ -138,10 +138,19 @@ void MyWorker::intervalGen(int interval)
     loop.exec();
 }
 
-void MyWorker::setter(QString portName, int baudRate)
+void MyWorker::setter(QString portName,
+                      int baudRate,
+                      QSerialPort::DataBits dataBits,
+                      QSerialPort::Parity parity,
+                      QSerialPort::StopBits stopBits,
+                      QSerialPort::FlowControl flowCtrl)
 {
     this->portName = portName;
     this->baudRate = baudRate;
+    this->dataBits = dataBits;
+    this->parity = parity;
+    this->stopBits = stopBits;
+    this->flowCtrl = flowCtrl;
 }
 
 void MyWorker::readPort()

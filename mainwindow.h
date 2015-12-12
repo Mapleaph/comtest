@@ -44,7 +44,7 @@ public:
     void updateUiOpened(QPushButton* btnOpen,
                         QPushButton* btnClose,
                         QPushButton* btnSend,
-                        QComboBox* comboBox,
+                        QComboBox* comboBox1, QComboBox *comboBox2, QComboBox *comboBox3, QComboBox *comboBox4, QComboBox *comboBox5,
                         QSpinBox* spinBox,
                         QCheckBox* chkBox
                         );
@@ -54,7 +54,7 @@ public:
                         QPushButton* btnSend,
                         QSpinBox* spinBox,
                         QCheckBox* chkBox,
-                        QComboBox* comboBox);
+                        QComboBox* comboBox1, QComboBox *comboBox2, QComboBox *comboBox3, QComboBox *comboBox4, QComboBox *comboBox5, QPushButton *btnSendClr);
     void limitCharsInTextEdit(const QTextEdit* textEdit, const int maxChars);
     Ui::MainWindow* ui;
     QStringList localConfigData;

@@ -66,6 +66,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     }
 
+    ui->tabWidget->setCurrentIndex(0);
+
     connect(timer[0], SIGNAL(timeout()), this, SLOT(updateReadDataUi1()));
     connect(timer[1], SIGNAL(timeout()), this, SLOT(updateReadDataUi2()));
     connect(timer[2], SIGNAL(timeout()), this, SLOT(updateReadDataUi3()));
@@ -86,12 +88,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
     localConfigData = (QStringList() << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0");
 
-    const QStringList lst = (QStringList() << "9600" << "19200" << "38400" << "57600" << "115200");
+    const QStringList baudRate = (QStringList() << "9600" << "19200" << "38400" << "57600" << "115200");
+    const QStringList dataBits = (QStringList() << "5" << "6" << "7" << "8");
+    const QStringList stopBits = (QStringList() << "1" << "1.5" << "2");
+    const QStringList parity = (QStringList() << "None" << "Even" << "Odd" << "Mark" << "Space");
+    const QStringList flowCtrl = (QStringList() << "None" << "RTS/CTS" << "XON/XOFF");
 
 
     // COM1
     initIntervalSpinBox(ui->spinBox_11);
-    ui->comboBox_11->addItems(lst);
+    ui->comboBox_11->addItems(baudRate);
+    ui->comboBox_12->addItems(dataBits);
+    ui->comboBox_13->addItems(parity);
+    ui->comboBox_14->addItems(stopBits);
+    ui->comboBox_15->addItems(flowCtrl);
+    ui->comboBox_12->setCurrentIndex(3);
     initPortUi(ui->btn_open_1,
                ui->btn_close_1,
                ui->spinBox_11,
@@ -106,8 +117,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // COM2
     initIntervalSpinBox(ui->spinBox_21);
-    ui->comboBox_21->addItems(lst);
-
+    ui->comboBox_21->addItems(baudRate);
+    ui->comboBox_22->addItems(dataBits);
+    ui->comboBox_23->addItems(parity);
+    ui->comboBox_24->addItems(stopBits);
+    ui->comboBox_25->addItems(flowCtrl);
+    ui->comboBox_22->setCurrentIndex(3);
     initPortUi(ui->btn_open_2,
                ui->btn_close_2,
                ui->spinBox_21,
@@ -122,8 +137,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // COM3
     initIntervalSpinBox(ui->spinBox_31);
-    ui->comboBox_31->addItems(lst);
-
+    ui->comboBox_31->addItems(baudRate);
+    ui->comboBox_32->addItems(dataBits);
+    ui->comboBox_33->addItems(parity);
+    ui->comboBox_34->addItems(stopBits);
+    ui->comboBox_35->addItems(flowCtrl);
+    ui->comboBox_32->setCurrentIndex(3);
     initPortUi(ui->btn_open_3,
                ui->btn_close_3,
                ui->spinBox_31,
@@ -138,7 +157,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // COM4
     initIntervalSpinBox(ui->spinBox_41);
-    ui->comboBox_41->addItems(lst);
+    ui->comboBox_41->addItems(baudRate);
+    ui->comboBox_42->addItems(dataBits);
+    ui->comboBox_43->addItems(parity);
+    ui->comboBox_44->addItems(stopBits);
+    ui->comboBox_45->addItems(flowCtrl);
+    ui->comboBox_42->setCurrentIndex(3);
 
     initPortUi(ui->btn_open_4,
                ui->btn_close_4,
@@ -154,7 +178,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // COM5
     initIntervalSpinBox(ui->spinBox_51);
-    ui->comboBox_51->addItems(lst);
+    ui->comboBox_51->addItems(baudRate);
+    ui->comboBox_52->addItems(dataBits);
+    ui->comboBox_53->addItems(parity);
+    ui->comboBox_54->addItems(stopBits);
+    ui->comboBox_55->addItems(flowCtrl);
+    ui->comboBox_52->setCurrentIndex(3);
 
     initPortUi(ui->btn_open_5,
                ui->btn_close_5,
@@ -170,7 +199,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // COM6
     initIntervalSpinBox(ui->spinBox_61);
-    ui->comboBox_61->addItems(lst);
+    ui->comboBox_61->addItems(baudRate);
+    ui->comboBox_62->addItems(dataBits);
+    ui->comboBox_63->addItems(parity);
+    ui->comboBox_64->addItems(stopBits);
+    ui->comboBox_65->addItems(flowCtrl);
+    ui->comboBox_62->setCurrentIndex(3);
 
     initPortUi(ui->btn_open_6,
                ui->btn_close_6,
@@ -186,7 +220,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // COM7
     initIntervalSpinBox(ui->spinBox_71);
-    ui->comboBox_71->addItems(lst);
+    ui->comboBox_71->addItems(baudRate);
+    ui->comboBox_72->addItems(dataBits);
+    ui->comboBox_73->addItems(parity);
+    ui->comboBox_74->addItems(stopBits);
+    ui->comboBox_75->addItems(flowCtrl);
+    ui->comboBox_72->setCurrentIndex(3);
 
     initPortUi(ui->btn_open_7,
                ui->btn_close_7,
@@ -202,7 +241,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // COM8
     initIntervalSpinBox(ui->spinBox_81);
-    ui->comboBox_81->addItems(lst);
+    ui->comboBox_81->addItems(baudRate);
+    ui->comboBox_82->addItems(dataBits);
+    ui->comboBox_83->addItems(parity);
+    ui->comboBox_84->addItems(stopBits);
+    ui->comboBox_85->addItems(flowCtrl);
+    ui->comboBox_82->setCurrentIndex(3);
 
     initPortUi(ui->btn_open_8,
                ui->btn_close_8,
@@ -460,17 +504,25 @@ void MainWindow::on_btn_send_8_clicked()
 // section updateUiOpened
 
 void MainWindow::updateUiOpened(QPushButton* btnOpen,
-                    QPushButton* btnClose,
-                    QPushButton* btnSend,
-                    QComboBox* comboBox,
-                    QSpinBox* spinBox,
-                    QCheckBox* chkBox
-                    )
+                                QPushButton* btnClose,
+                                QPushButton* btnSend,
+                                QComboBox* comboBox1,
+                                QComboBox* comboBox2,
+                                QComboBox* comboBox3,
+                                QComboBox* comboBox4,
+                                QComboBox* comboBox5,
+                                QSpinBox* spinBox,
+                                QCheckBox* chkBox
+                                )
 {
     btnOpen->setDisabled(true);
     btnClose->setDisabled(false);
     btnSend->setDisabled(false);
-    comboBox->setDisabled(true);
+    comboBox1->setDisabled(true);
+    comboBox2->setDisabled(true);
+    comboBox3->setDisabled(true);
+    comboBox4->setDisabled(true);
+    comboBox5->setDisabled(true);
     spinBox->setDisabled(false);
     chkBox->setDisabled(false);
 }
@@ -481,6 +533,10 @@ void MainWindow::updateUiOpened1()
                    ui->btn_close_1,
                    ui->btn_send_1,
                    ui->comboBox_11,
+                   ui->comboBox_12,
+                   ui->comboBox_13,
+                   ui->comboBox_14,
+                   ui->comboBox_15,
                    ui->spinBox_11,
                    ui->checkBox_12);
 }
@@ -491,6 +547,10 @@ void MainWindow::updateUiOpened2()
                    ui->btn_close_2,
                    ui->btn_send_2,
                    ui->comboBox_21,
+                   ui->comboBox_22,
+                   ui->comboBox_23,
+                   ui->comboBox_24,
+                   ui->comboBox_25,
                    ui->spinBox_21,
                    ui->checkBox_22);
 }
@@ -501,6 +561,10 @@ void MainWindow::updateUiOpened3()
                    ui->btn_close_3,
                    ui->btn_send_3,
                    ui->comboBox_31,
+                   ui->comboBox_32,
+                   ui->comboBox_33,
+                   ui->comboBox_34,
+                   ui->comboBox_35,
                    ui->spinBox_31,
                    ui->checkBox_32);
 }
@@ -511,6 +575,10 @@ void MainWindow::updateUiOpened4()
                    ui->btn_close_4,
                    ui->btn_send_4,
                    ui->comboBox_41,
+                   ui->comboBox_42,
+                   ui->comboBox_43,
+                   ui->comboBox_44,
+                   ui->comboBox_45,
                    ui->spinBox_41,
                    ui->checkBox_42);
 }
@@ -521,6 +589,10 @@ void MainWindow::updateUiOpened5()
                    ui->btn_close_5,
                    ui->btn_send_5,
                    ui->comboBox_51,
+                   ui->comboBox_52,
+                   ui->comboBox_53,
+                   ui->comboBox_54,
+                   ui->comboBox_55,
                    ui->spinBox_51,
                    ui->checkBox_52);
 }
@@ -531,6 +603,10 @@ void MainWindow::updateUiOpened6()
                    ui->btn_close_6,
                    ui->btn_send_6,
                    ui->comboBox_61,
+                   ui->comboBox_62,
+                   ui->comboBox_63,
+                   ui->comboBox_64,
+                   ui->comboBox_65,
                    ui->spinBox_61,
                    ui->checkBox_62);
 }
@@ -541,6 +617,10 @@ void MainWindow::updateUiOpened7()
                    ui->btn_close_7,
                    ui->btn_send_7,
                    ui->comboBox_71,
+                   ui->comboBox_72,
+                   ui->comboBox_73,
+                   ui->comboBox_74,
+                   ui->comboBox_75,
                    ui->spinBox_71,
                    ui->checkBox_72);
 }
@@ -551,6 +631,10 @@ void MainWindow::updateUiOpened8()
                    ui->btn_close_8,
                    ui->btn_send_8,
                    ui->comboBox_81,
+                   ui->comboBox_82,
+                   ui->comboBox_83,
+                   ui->comboBox_84,
+                   ui->comboBox_85,
                    ui->spinBox_81,
                    ui->checkBox_82);
 }
@@ -718,7 +802,14 @@ void MainWindow::on_btn_open_1_clicked()
     QString portName = localConfigData[0];
 
     worker[0] = new MyWorker();
-    worker[0]->setter(portName, baudRateLst[ui->comboBox_11->currentIndex()]);
+    worker[0]->setter(portName,
+                      baudRateLst[ui->comboBox_11->currentIndex()],
+            dataBitsLst[ui->comboBox_12->currentIndex()],
+            parityLst[ui->comboBox_13->currentIndex()],
+            stopBitsLst[ui->comboBox_14->currentIndex()],
+            flowCtrlLst[ui->comboBox_15->currentIndex()]
+            );
+
     thread[0] = new QThread();
     connect(thread[0], SIGNAL(finished()), worker[0], SLOT(deleteLater()));
     connect(worker[0], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt1(int)));
@@ -755,7 +846,13 @@ void MainWindow::on_btn_open_2_clicked()
     QString portName = localConfigData[1];
 
     worker[1] = new MyWorker();
-    worker[1]->setter(portName, baudRateLst[ui->comboBox_21->currentIndex()]);
+    worker[1]->setter(portName,
+                      baudRateLst[ui->comboBox_21->currentIndex()],
+            dataBitsLst[ui->comboBox_22->currentIndex()],
+            parityLst[ui->comboBox_23->currentIndex()],
+            stopBitsLst[ui->comboBox_24->currentIndex()],
+            flowCtrlLst[ui->comboBox_25->currentIndex()]
+            );
     thread[1] = new QThread();
     worker[1]->moveToThread(thread[1]);
     thread[1]->start();
@@ -794,7 +891,13 @@ void MainWindow::on_btn_open_3_clicked()
     QString portName = localConfigData[2];
 
     worker[2] = new MyWorker();
-    worker[2]->setter(portName, baudRateLst[ui->comboBox_31->currentIndex()]);
+    worker[2]->setter(portName,
+                      baudRateLst[ui->comboBox_31->currentIndex()],
+            dataBitsLst[ui->comboBox_32->currentIndex()],
+            parityLst[ui->comboBox_33->currentIndex()],
+            stopBitsLst[ui->comboBox_34->currentIndex()],
+            flowCtrlLst[ui->comboBox_35->currentIndex()]
+            );
     thread[2] = new QThread();
     connect(thread[2], SIGNAL(finished()), worker[2], SLOT(deleteLater()));
     connect(worker[2], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt3(int)));
@@ -828,7 +931,13 @@ void MainWindow::on_btn_open_4_clicked()
     QString portName = localConfigData[3];
 
     worker[3] = new MyWorker();
-    worker[3]->setter(portName, baudRateLst[ui->comboBox_41->currentIndex()]);
+    worker[3]->setter(portName,
+                      baudRateLst[ui->comboBox_41->currentIndex()],
+            dataBitsLst[ui->comboBox_42->currentIndex()],
+            parityLst[ui->comboBox_43->currentIndex()],
+            stopBitsLst[ui->comboBox_44->currentIndex()],
+            flowCtrlLst[ui->comboBox_45->currentIndex()]
+            );
     thread[3] = new QThread();
     connect(thread[3], SIGNAL(finished()), worker[3], SLOT(deleteLater()));
     connect(worker[3], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt4(int)));
@@ -862,7 +971,13 @@ void MainWindow::on_btn_open_5_clicked()
     QString portName = localConfigData[4];
 
     worker[4] = new MyWorker();
-    worker[4]->setter(portName, baudRateLst[ui->comboBox_51->currentIndex()]);
+    worker[4]->setter(portName,
+                      baudRateLst[ui->comboBox_51->currentIndex()],
+            dataBitsLst[ui->comboBox_52->currentIndex()],
+            parityLst[ui->comboBox_53->currentIndex()],
+            stopBitsLst[ui->comboBox_54->currentIndex()],
+            flowCtrlLst[ui->comboBox_55->currentIndex()]
+            );
     thread[4] = new QThread();
 
     connect(thread[4], SIGNAL(finished()), worker[4], SLOT(deleteLater()));
@@ -898,7 +1013,13 @@ void MainWindow::on_btn_open_6_clicked()
     QString portName = localConfigData[5];
 
     worker[5] = new MyWorker();
-    worker[5]->setter(portName, baudRateLst[ui->comboBox_61->currentIndex()]);
+    worker[5]->setter(portName,
+                      baudRateLst[ui->comboBox_61->currentIndex()],
+            dataBitsLst[ui->comboBox_62->currentIndex()],
+            parityLst[ui->comboBox_63->currentIndex()],
+            stopBitsLst[ui->comboBox_64->currentIndex()],
+            flowCtrlLst[ui->comboBox_65->currentIndex()]
+            );
     thread[5] = new QThread();
 
     connect(thread[5], SIGNAL(finished()), worker[5], SLOT(deleteLater()));
@@ -935,7 +1056,13 @@ void MainWindow::on_btn_open_7_clicked()
     QString portName = localConfigData[6];
 
     worker[6] = new MyWorker();
-    worker[6]->setter(portName, baudRateLst[ui->comboBox_71->currentIndex()]);
+    worker[6]->setter(portName,
+                      baudRateLst[ui->comboBox_71->currentIndex()],
+            dataBitsLst[ui->comboBox_72->currentIndex()],
+            parityLst[ui->comboBox_73->currentIndex()],
+            stopBitsLst[ui->comboBox_74->currentIndex()],
+            flowCtrlLst[ui->comboBox_75->currentIndex()]
+            );
     thread[6] = new QThread();
 
     connect(thread[6], SIGNAL(finished()), worker[6], SLOT(deleteLater()));
@@ -972,7 +1099,13 @@ void MainWindow::on_btn_open_8_clicked()
     QString portName = localConfigData[7];
 
     worker[7] = new MyWorker();
-    worker[7]->setter(portName, baudRateLst[ui->comboBox_81->currentIndex()]);
+    worker[7]->setter(portName,
+                      baudRateLst[ui->comboBox_81->currentIndex()],
+            dataBitsLst[ui->comboBox_82->currentIndex()],
+            parityLst[ui->comboBox_83->currentIndex()],
+            stopBitsLst[ui->comboBox_84->currentIndex()],
+            flowCtrlLst[ui->comboBox_85->currentIndex()]
+            );
     thread[7] = new QThread();
 
     connect(thread[7], SIGNAL(finished()), worker[7], SLOT(deleteLater()));
@@ -1056,7 +1189,12 @@ void MainWindow::updateUiClosed(QPushButton* btnOpen,
                                 QPushButton* btnSend,
                                 QSpinBox* spinBox,
                                 QCheckBox* chkBox,
-                                QComboBox* comboBox)
+                                QComboBox* comboBox1,
+                                QComboBox* comboBox2,
+                                QComboBox* comboBox3,
+                                QComboBox* comboBox4,
+                                QComboBox* comboBox5,
+                                QPushButton* btnSendClr)
 {
 
     btnOpen->setDisabled(false);
@@ -1064,8 +1202,12 @@ void MainWindow::updateUiClosed(QPushButton* btnOpen,
     btnSend->setDisabled(true);
     spinBox->setDisabled(true);
     chkBox->setDisabled(true);
-    comboBox->setDisabled(false);
-
+    comboBox1->setDisabled(false);
+    comboBox2->setDisabled(false);
+    comboBox3->setDisabled(false);
+    comboBox4->setDisabled(false);
+    comboBox5->setDisabled(false);
+    btnSendClr->setEnabled(true);
 }
 
 void MainWindow::on_btn_close_1_clicked()
@@ -1086,7 +1228,12 @@ void MainWindow::on_btn_close_1_clicked()
                    ui->btn_send_1,
                    ui->spinBox_11,
                    ui->checkBox_12,
-                   ui->comboBox_11);
+                   ui->comboBox_11,
+                   ui->comboBox_12,
+                   ui->comboBox_13,
+                   ui->comboBox_14,
+                   ui->comboBox_15,
+                   ui->btn_clr_12);
 
 }
 
@@ -1106,7 +1253,12 @@ void MainWindow::on_btn_close_2_clicked()
                    ui->btn_send_2,
                    ui->spinBox_21,
                    ui->checkBox_22,
-                   ui->comboBox_21);
+                   ui->comboBox_21,
+                   ui->comboBox_22,
+                   ui->comboBox_23,
+                   ui->comboBox_24,
+                   ui->comboBox_25,
+                   ui->btn_clr_22);
 }
 
 void MainWindow::on_btn_close_3_clicked()
@@ -1125,7 +1277,12 @@ void MainWindow::on_btn_close_3_clicked()
                    ui->btn_send_3,
                    ui->spinBox_31,
                    ui->checkBox_32,
-                   ui->comboBox_31);
+                   ui->comboBox_31,
+                   ui->comboBox_32,
+                   ui->comboBox_33,
+                   ui->comboBox_34,
+                   ui->comboBox_35,
+                   ui->btn_clr_32);
 }
 
 void MainWindow::on_btn_close_4_clicked()
@@ -1144,7 +1301,12 @@ void MainWindow::on_btn_close_4_clicked()
                    ui->btn_send_4,
                    ui->spinBox_41,
                    ui->checkBox_42,
-                   ui->comboBox_41);
+                   ui->comboBox_41,
+                   ui->comboBox_42,
+                   ui->comboBox_43,
+                   ui->comboBox_44,
+                   ui->comboBox_45,
+                   ui->btn_clr_42);
 }
 
 void MainWindow::on_btn_close_5_clicked()
@@ -1163,7 +1325,12 @@ void MainWindow::on_btn_close_5_clicked()
                    ui->btn_send_5,
                    ui->spinBox_51,
                    ui->checkBox_52,
-                   ui->comboBox_51);
+                   ui->comboBox_51,
+                   ui->comboBox_52,
+                   ui->comboBox_53,
+                   ui->comboBox_54,
+                   ui->comboBox_55,
+                   ui->btn_clr_52);
 }
 
 void MainWindow::on_btn_close_6_clicked()
@@ -1182,7 +1349,12 @@ void MainWindow::on_btn_close_6_clicked()
                    ui->btn_send_6,
                    ui->spinBox_61,
                    ui->checkBox_62,
-                   ui->comboBox_61);
+                   ui->comboBox_61,
+                   ui->comboBox_62,
+                   ui->comboBox_63,
+                   ui->comboBox_64,
+                   ui->comboBox_65,
+                   ui->btn_clr_62);
 }
 
 void MainWindow::on_btn_close_7_clicked()
@@ -1201,7 +1373,12 @@ void MainWindow::on_btn_close_7_clicked()
                    ui->btn_send_7,
                    ui->spinBox_71,
                    ui->checkBox_72,
-                   ui->comboBox_71);
+                   ui->comboBox_71,
+                   ui->comboBox_72,
+                   ui->comboBox_73,
+                   ui->comboBox_74,
+                   ui->comboBox_75,
+                   ui->btn_clr_72);
 }
 
 void MainWindow::on_btn_close_8_clicked()
@@ -1220,7 +1397,12 @@ void MainWindow::on_btn_close_8_clicked()
                    ui->btn_send_8,
                    ui->spinBox_81,
                    ui->checkBox_82,
-                   ui->comboBox_81);
+                   ui->comboBox_81,
+                   ui->comboBox_82,
+                   ui->comboBox_83,
+                   ui->comboBox_84,
+                   ui->comboBox_85,
+                   ui->btn_clr_82);
 }
 
 // section btn_close end
@@ -1932,7 +2114,7 @@ void MainWindow::updateReadDataUi3()
 
                 tmparr[2].insert(i, " ");
                 i += 3;
-                recvCnt[1]++;
+                recvCnt[2]++;
 
             }
 

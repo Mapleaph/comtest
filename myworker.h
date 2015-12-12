@@ -13,7 +13,13 @@ public:
     MyWorker();
     ~MyWorker();
 
-    void setter(QString portName, int baudRate);
+    void setter(QString portName,
+                int baudRate,
+                QSerialPort::DataBits dataBits,
+                QSerialPort::Parity parity,
+                QSerialPort::StopBits stopBits,
+                QSerialPort::FlowControl flowCtrl);
+
     void intervalGen(int interval);
     QSerialPort* port;
     bool continueFlag;
@@ -36,8 +42,10 @@ signals:
 private:
     QString portName;
     int baudRate;
-
-
+    QSerialPort::DataBits dataBits;
+    QSerialPort::StopBits stopBits;
+    QSerialPort::Parity parity;
+    QSerialPort::FlowControl flowCtrl;
 
 };
 
