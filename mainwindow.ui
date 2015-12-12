@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1243</width>
-    <height>528</height>
+    <width>1251</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1243</width>
-    <height>528</height>
+    <width>1251</width>
+    <height>550</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1243</width>
-    <height>528</height>
+    <width>1251</width>
+    <height>550</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -29,8 +29,8 @@
    <widget class="QPushButton" name="btn_config">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>10</y>
+      <x>20</x>
+      <y>20</y>
       <width>75</width>
       <height>31</height>
      </rect>
@@ -42,14 +42,14 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>16</x>
-      <y>49</y>
+      <x>20</x>
+      <y>70</y>
       <width>1211</width>
       <height>461</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -619,7 +619,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -631,8 +631,8 @@
       <widget class="QSpinBox" name="spinBox_11">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -641,8 +641,8 @@
       <widget class="QCheckBox" name="checkBox_12">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>
@@ -796,7 +796,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -808,8 +808,8 @@
       <widget class="QSpinBox" name="spinBox_21">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -818,8 +818,8 @@
       <widget class="QCheckBox" name="checkBox_22">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>
@@ -1470,7 +1470,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1482,8 +1482,8 @@
       <widget class="QSpinBox" name="spinBox_31">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -1492,8 +1492,8 @@
       <widget class="QCheckBox" name="checkBox_32">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>
@@ -1519,7 +1519,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -1531,8 +1531,8 @@
       <widget class="QSpinBox" name="spinBox_41">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -1541,8 +1541,8 @@
       <widget class="QCheckBox" name="checkBox_42">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>
@@ -2349,7 +2349,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -2361,8 +2361,8 @@
       <widget class="QSpinBox" name="spinBox_51">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -2371,8 +2371,8 @@
       <widget class="QCheckBox" name="checkBox_52">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>
@@ -2398,7 +2398,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -2410,8 +2410,8 @@
       <widget class="QSpinBox" name="spinBox_61">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -2420,8 +2420,8 @@
       <widget class="QCheckBox" name="checkBox_62">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>
@@ -3225,7 +3225,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3237,8 +3237,8 @@
       <widget class="QSpinBox" name="spinBox_71">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -3247,8 +3247,8 @@
       <widget class="QCheckBox" name="checkBox_72">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>
@@ -3274,7 +3274,7 @@
        <property name="geometry">
         <rect>
          <x>100</x>
-         <y>20</y>
+         <y>25</y>
          <width>21</width>
          <height>16</height>
         </rect>
@@ -3286,8 +3286,8 @@
       <widget class="QSpinBox" name="spinBox_81">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>20</y>
+         <x>25</x>
+         <y>23</y>
          <width>71</width>
          <height>22</height>
         </rect>
@@ -3296,8 +3296,8 @@
       <widget class="QCheckBox" name="checkBox_82">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>50</y>
+         <x>25</x>
+         <y>53</y>
          <width>71</width>
          <height>19</height>
         </rect>

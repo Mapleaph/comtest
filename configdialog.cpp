@@ -28,6 +28,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
         ui->comboBox61->setDisabled(true);
         ui->comboBox71->setDisabled(true);
         ui->comboBox81->setDisabled(true);
+        ui->btn_save_config->setDisabled(true);
 
     } else {
 
