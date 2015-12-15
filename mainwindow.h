@@ -54,7 +54,7 @@ public:
                         QPushButton* btnSend,
                         QSpinBox* spinBox,
                         QCheckBox* chkBox,
-                        QComboBox* comboBox1, QComboBox *comboBox2, QComboBox *comboBox3, QComboBox *comboBox4, QComboBox *comboBox5, QPushButton *btnSendClr);
+                        QComboBox* comboBox1, QComboBox *comboBox2, QComboBox *comboBox3, QComboBox *comboBox4, QComboBox *comboBox5, QPushButton *btnSendClr, QTextEdit *edit);
     void limitCharsInTextEdit(const QTextEdit* textEdit, const int maxChars);
     Ui::MainWindow* ui;
     QStringList localConfigData;

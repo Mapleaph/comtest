@@ -1194,7 +1194,8 @@ void MainWindow::updateUiClosed(QPushButton* btnOpen,
                                 QComboBox* comboBox3,
                                 QComboBox* comboBox4,
                                 QComboBox* comboBox5,
-                                QPushButton* btnSendClr)
+                                QPushButton* btnSendClr,
+                                QTextEdit* edit)
 {
 
     btnOpen->setDisabled(false);
@@ -1208,6 +1209,7 @@ void MainWindow::updateUiClosed(QPushButton* btnOpen,
     comboBox4->setDisabled(false);
     comboBox5->setDisabled(false);
     btnSendClr->setEnabled(true);
+    edit->setReadOnly(false);
 }
 
 void MainWindow::on_btn_close_1_clicked()
@@ -1233,7 +1235,8 @@ void MainWindow::on_btn_close_1_clicked()
                    ui->comboBox_13,
                    ui->comboBox_14,
                    ui->comboBox_15,
-                   ui->btn_clr_12);
+                   ui->btn_clr_12,
+                   ui->textEdit_12);
 
 }
 
@@ -1258,7 +1261,8 @@ void MainWindow::on_btn_close_2_clicked()
                    ui->comboBox_23,
                    ui->comboBox_24,
                    ui->comboBox_25,
-                   ui->btn_clr_22);
+                   ui->btn_clr_22,
+                   ui->textEdit_22);
 }
 
 void MainWindow::on_btn_close_3_clicked()
@@ -1282,7 +1286,8 @@ void MainWindow::on_btn_close_3_clicked()
                    ui->comboBox_33,
                    ui->comboBox_34,
                    ui->comboBox_35,
-                   ui->btn_clr_32);
+                   ui->btn_clr_32,
+                   ui->textEdit_32);
 }
 
 void MainWindow::on_btn_close_4_clicked()
@@ -1306,7 +1311,8 @@ void MainWindow::on_btn_close_4_clicked()
                    ui->comboBox_43,
                    ui->comboBox_44,
                    ui->comboBox_45,
-                   ui->btn_clr_42);
+                   ui->btn_clr_42,
+                   ui->textEdit_42);
 }
 
 void MainWindow::on_btn_close_5_clicked()
@@ -1330,7 +1336,8 @@ void MainWindow::on_btn_close_5_clicked()
                    ui->comboBox_53,
                    ui->comboBox_54,
                    ui->comboBox_55,
-                   ui->btn_clr_52);
+                   ui->btn_clr_52,
+                   ui->textEdit_52);
 }
 
 void MainWindow::on_btn_close_6_clicked()
@@ -1354,7 +1361,8 @@ void MainWindow::on_btn_close_6_clicked()
                    ui->comboBox_63,
                    ui->comboBox_64,
                    ui->comboBox_65,
-                   ui->btn_clr_62);
+                   ui->btn_clr_62,
+                   ui->textEdit_62);
 }
 
 void MainWindow::on_btn_close_7_clicked()
@@ -1378,7 +1386,8 @@ void MainWindow::on_btn_close_7_clicked()
                    ui->comboBox_73,
                    ui->comboBox_74,
                    ui->comboBox_75,
-                   ui->btn_clr_72);
+                   ui->btn_clr_72,
+                   ui->textEdit_72);
 }
 
 void MainWindow::on_btn_close_8_clicked()
@@ -1402,7 +1411,8 @@ void MainWindow::on_btn_close_8_clicked()
                    ui->comboBox_83,
                    ui->comboBox_84,
                    ui->comboBox_85,
-                   ui->btn_clr_82);
+                   ui->btn_clr_82,
+                   ui->textEdit_82);
 }
 
 // section btn_close end
