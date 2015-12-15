@@ -1,4 +1,4 @@
-#ifndef SER_H
+﻿#ifndef SER_H
 #define SER_H
 
 #include <QSerialPort>

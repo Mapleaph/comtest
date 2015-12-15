@@ -1,14 +1,18 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "configdialog.h"
+#include "qextserialport.h"
 #include "ser.h"
-#include <QSerialPort>
 #include <QEventLoop>
 #include <QTimer>
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QCoreApplication>
 #include <QDebug>
+
+#ifdef _MSC_VER
+#pragma execution_character_set("utf-8")
+#endif
 
 int configured_flag = 0;
 QByteArray tmparr[8];
@@ -88,10 +92,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     localConfigData = (QStringList() << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0");
 
-    const QStringList baudRate = (QStringList() << "9600" << "19200" << "38400" << "57600" << "115200");
+    const QStringList baudRate = (QStringList() << "110" << "300" << "600"
+                                  << "1200" << "2400" << "4800"
+                                  << "9600" << "14400" << "19200"
+                                  << "38400" << "56000" << "57600" << "115200"
+                                  << "128000" << "256000");
     const QStringList dataBits = (QStringList() << "5" << "6" << "7" << "8");
     const QStringList stopBits = (QStringList() << "1" << "1.5" << "2");
-    const QStringList parity = (QStringList() << "None" << "Even" << "Odd" << "Mark" << "Space");
+    const QStringList parity = (QStringList() << "None" << "Odd" << "Even" << "Mark" << "Space");
     const QStringList flowCtrl = (QStringList() << "None" << "RTS/CTS" << "XON/XOFF");
 
 
@@ -789,6 +797,31 @@ void MainWindow::cannotOpenNotify8()
 
 // section btn_open
 
+// configCheck
+
+bool MainWindow::configCheck(DataBitsType dataBits, StopBitsType stopBits)
+{
+
+    if ((stopBits == STOP_1_5) && (dataBits != DATA_5)) {
+
+        QMessageBox::about(NULL, "警告", "1.5个停止位只能与5个数据位一起使用");
+        return false;
+
+    }
+
+    if ((stopBits == STOP_2) && (dataBits == DATA_5)) {
+
+        QMessageBox::about(NULL, "警告", "2个停止位不能与5个数据位一起使用");
+        return false;
+
+    }
+
+    return true;
+
+}
+
+// configCheck end
+
 void MainWindow::on_btn_open_1_clicked()
 {
 
@@ -801,14 +834,23 @@ void MainWindow::on_btn_open_1_clicked()
 
     QString portName = localConfigData[0];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_11->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_12->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_13->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_14->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_15->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[0] = new MyWorker();
     worker[0]->setter(portName,
-                      baudRateLst[ui->comboBox_11->currentIndex()],
-            dataBitsLst[ui->comboBox_12->currentIndex()],
-            parityLst[ui->comboBox_13->currentIndex()],
-            stopBitsLst[ui->comboBox_14->currentIndex()],
-            flowCtrlLst[ui->comboBox_15->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
 
     thread[0] = new QThread();
     connect(thread[0], SIGNAL(finished()), worker[0], SLOT(deleteLater()));
@@ -845,14 +887,24 @@ void MainWindow::on_btn_open_2_clicked()
 
     QString portName = localConfigData[1];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_21->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_22->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_23->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_24->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_25->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[1] = new MyWorker();
     worker[1]->setter(portName,
-                      baudRateLst[ui->comboBox_21->currentIndex()],
-            dataBitsLst[ui->comboBox_22->currentIndex()],
-            parityLst[ui->comboBox_23->currentIndex()],
-            stopBitsLst[ui->comboBox_24->currentIndex()],
-            flowCtrlLst[ui->comboBox_25->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
+
     thread[1] = new QThread();
     worker[1]->moveToThread(thread[1]);
     thread[1]->start();
@@ -890,14 +942,24 @@ void MainWindow::on_btn_open_3_clicked()
 
     QString portName = localConfigData[2];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_31->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_32->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_33->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_34->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_35->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[2] = new MyWorker();
     worker[2]->setter(portName,
-                      baudRateLst[ui->comboBox_31->currentIndex()],
-            dataBitsLst[ui->comboBox_32->currentIndex()],
-            parityLst[ui->comboBox_33->currentIndex()],
-            stopBitsLst[ui->comboBox_34->currentIndex()],
-            flowCtrlLst[ui->comboBox_35->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
+
     thread[2] = new QThread();
     connect(thread[2], SIGNAL(finished()), worker[2], SLOT(deleteLater()));
     connect(worker[2], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt3(int)));
@@ -930,14 +992,24 @@ void MainWindow::on_btn_open_4_clicked()
 
     QString portName = localConfigData[3];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_51->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_52->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_53->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_54->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_55->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[3] = new MyWorker();
     worker[3]->setter(portName,
-                      baudRateLst[ui->comboBox_41->currentIndex()],
-            dataBitsLst[ui->comboBox_42->currentIndex()],
-            parityLst[ui->comboBox_43->currentIndex()],
-            stopBitsLst[ui->comboBox_44->currentIndex()],
-            flowCtrlLst[ui->comboBox_45->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
+
     thread[3] = new QThread();
     connect(thread[3], SIGNAL(finished()), worker[3], SLOT(deleteLater()));
     connect(worker[3], SIGNAL(sigUpdateSendCnt(int)), this, SLOT(updateSendCnt4(int)));
@@ -970,14 +1042,24 @@ void MainWindow::on_btn_open_5_clicked()
 
     QString portName = localConfigData[4];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_51->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_52->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_53->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_54->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_55->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[4] = new MyWorker();
     worker[4]->setter(portName,
-                      baudRateLst[ui->comboBox_51->currentIndex()],
-            dataBitsLst[ui->comboBox_52->currentIndex()],
-            parityLst[ui->comboBox_53->currentIndex()],
-            stopBitsLst[ui->comboBox_54->currentIndex()],
-            flowCtrlLst[ui->comboBox_55->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
+
     thread[4] = new QThread();
 
     connect(thread[4], SIGNAL(finished()), worker[4], SLOT(deleteLater()));
@@ -1012,14 +1094,24 @@ void MainWindow::on_btn_open_6_clicked()
 
     QString portName = localConfigData[5];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_61->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_62->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_63->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_64->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_65->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[5] = new MyWorker();
     worker[5]->setter(portName,
-                      baudRateLst[ui->comboBox_61->currentIndex()],
-            dataBitsLst[ui->comboBox_62->currentIndex()],
-            parityLst[ui->comboBox_63->currentIndex()],
-            stopBitsLst[ui->comboBox_64->currentIndex()],
-            flowCtrlLst[ui->comboBox_65->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
+
     thread[5] = new QThread();
 
     connect(thread[5], SIGNAL(finished()), worker[5], SLOT(deleteLater()));
@@ -1055,14 +1147,24 @@ void MainWindow::on_btn_open_7_clicked()
 
     QString portName = localConfigData[6];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_71->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_72->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_73->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_74->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_75->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[6] = new MyWorker();
     worker[6]->setter(portName,
-                      baudRateLst[ui->comboBox_71->currentIndex()],
-            dataBitsLst[ui->comboBox_72->currentIndex()],
-            parityLst[ui->comboBox_73->currentIndex()],
-            stopBitsLst[ui->comboBox_74->currentIndex()],
-            flowCtrlLst[ui->comboBox_75->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
+
     thread[6] = new QThread();
 
     connect(thread[6], SIGNAL(finished()), worker[6], SLOT(deleteLater()));
@@ -1098,14 +1200,24 @@ void MainWindow::on_btn_open_8_clicked()
 
     QString portName = localConfigData[7];
 
+    BaudRateType baudRate = (BaudRateType)ui->comboBox_81->currentText().toInt();
+    DataBitsType dataBits = (DataBitsType)ui->comboBox_82->currentText().toInt();
+    ParityType parity = (ParityType)ui->comboBox_83->currentIndex();
+    StopBitsType stopBits = (StopBitsType)ui->comboBox_84->currentIndex();
+    FlowType flowCtrl = (FlowType)ui->comboBox_85->currentIndex();
+
+    if (!configCheck(dataBits, stopBits)) {
+        return;
+    }
+
     worker[7] = new MyWorker();
     worker[7]->setter(portName,
-                      baudRateLst[ui->comboBox_81->currentIndex()],
-            dataBitsLst[ui->comboBox_82->currentIndex()],
-            parityLst[ui->comboBox_83->currentIndex()],
-            stopBitsLst[ui->comboBox_84->currentIndex()],
-            flowCtrlLst[ui->comboBox_85->currentIndex()]
-            );
+                      baudRate,
+                      dataBits,
+                      parity,
+                      stopBits,
+                      flowCtrl);
+
     thread[7] = new QThread();
 
     connect(thread[7], SIGNAL(finished()), worker[7], SLOT(deleteLater()));

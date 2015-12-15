@@ -11,16 +11,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ComTest
 TEMPLATE = app
 
+include(3rdparty/qextserialport/src/qextserialport.pri)
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     configdialog.cpp \
-    myworker.cpp
+    myworker.cpp \
+
 
 HEADERS  += mainwindow.h \
     configdialog.h \
     ser.h \
-    myworker.h
+    myworker.h \
+
 
 FORMS    += mainwindow.ui \
     configdialog.ui

@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QSerialPort>
@@ -56,6 +56,7 @@ public:
                         QCheckBox* chkBox,
                         QComboBox* comboBox1, QComboBox *comboBox2, QComboBox *comboBox3, QComboBox *comboBox4, QComboBox *comboBox5, QPushButton *btnSendClr, QTextEdit *edit);
     void limitCharsInTextEdit(const QTextEdit* textEdit, const int maxChars);
+    bool configCheck(DataBitsType dataBits, StopBitsType stopBits);
     Ui::MainWindow* ui;
     QStringList localConfigData;
     QSerialPort* port[PORT_NUM];

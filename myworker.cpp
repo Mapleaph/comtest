@@ -1,7 +1,7 @@
-#include "myworker.h"
+﻿#include "myworker.h"
 
 #include <QDebug>
-#include <QSerialPort>
+#include "qextserialport.h"
 #include <QSerialPortInfo>
 #include <QByteArray>
 #include <QEventLoop>
@@ -21,7 +21,7 @@ void MyWorker::doOpen()
 {
     qDebug() << "doOpen";
 
-    port = new QSerialPort(portName);
+    port = new QextSerialPort(portName);
 
     port->setBaudRate(baudRate);
     port->setDataBits(dataBits);
@@ -139,11 +139,11 @@ void MyWorker::intervalGen(int interval)
 }
 
 void MyWorker::setter(QString portName,
-                      int baudRate,
-                      QSerialPort::DataBits dataBits,
-                      QSerialPort::Parity parity,
-                      QSerialPort::StopBits stopBits,
-                      QSerialPort::FlowControl flowCtrl)
+                      BaudRateType baudRate,
+                      DataBitsType dataBits,
+                      ParityType parity,
+                      StopBitsType stopBits,
+                      FlowType flowCtrl)
 {
     this->portName = portName;
     this->baudRate = baudRate;

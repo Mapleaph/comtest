@@ -1,9 +1,9 @@
-#ifndef MYWORKER_H
+﻿#ifndef MYWORKER_H
 #define MYWORKER_H
 
 #include <QObject>
 #include <QString>
-#include <QSerialPort>
+#include "qextserialport.h"
 #include <QByteArray>
 
 class MyWorker : public QObject
@@ -14,14 +14,14 @@ public:
     ~MyWorker();
 
     void setter(QString portName,
-                int baudRate,
-                QSerialPort::DataBits dataBits,
-                QSerialPort::Parity parity,
-                QSerialPort::StopBits stopBits,
-                QSerialPort::FlowControl flowCtrl);
+                BaudRateType baudRate,
+                DataBitsType dataBits,
+                ParityType parity,
+                StopBitsType stopBits,
+                FlowType flowCtrl);
 
     void intervalGen(int interval);
-    QSerialPort* port;
+    QextSerialPort* port;
     bool continueFlag;
 
 private slots:
@@ -41,11 +41,11 @@ signals:
 
 private:
     QString portName;
-    int baudRate;
-    QSerialPort::DataBits dataBits;
-    QSerialPort::StopBits stopBits;
-    QSerialPort::Parity parity;
-    QSerialPort::FlowControl flowCtrl;
+    BaudRateType baudRate;
+    DataBitsType dataBits;
+    StopBitsType stopBits;
+    ParityType parity;
+    FlowType flowCtrl;
 
 };
 
