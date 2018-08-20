@@ -32,6 +32,6 @@ RC_FILE = res.rc
 
 ICON = icon.icns
 
-VERSION = 2.2.0.1
+VERSION = 2.2.0.2
 
 TRANSLATIONS = cn.ts
