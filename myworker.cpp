@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QEventLoop>
 #include <QTimer>
+#include <math.h>
 
 MyWorker::MyWorker()
 {

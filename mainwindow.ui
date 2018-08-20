@@ -6,50 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1251</width>
-    <height>550</height>
+    <width>1230</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1251</width>
-    <height>550</height>
+    <width>1230</width>
+    <height>500</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1251</width>
-    <height>550</height>
+    <width>1230</width>
+    <height>500</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>串口测试程序</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="btn_config">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>75</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>配置</string>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>70</y>
+      <x>10</x>
+      <y>10</y>
       <width>1211</width>
       <height>461</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -3566,26 +3553,51 @@
     </widget>
    </widget>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1230</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <action name="actionButton1">
+   <property name="text">
+    <string>Button1</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_11"/>
+  <buttongroup name="buttonGroup_9"/>
+  <buttongroup name="buttonGroup_6"/>
+  <buttongroup name="buttonGroup_5"/>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_14"/>
-  <buttongroup name="buttonGroup_8"/>
-  <buttongroup name="buttonGroup_9"/>
-  <buttongroup name="buttonGroup_16"/>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_5"/>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="buttonGroup_12"/>
   <buttongroup name="buttonGroup_10"/>
-  <buttongroup name="buttonGroup_15"/>
-  <buttongroup name="buttonGroup_6"/>
-  <buttongroup name="buttonGroup_13"/>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_8"/>
+  <buttongroup name="buttonGroup_12"/>
+  <buttongroup name="buttonGroup_16"/>
   <buttongroup name="buttonGroup_7"/>
+  <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_15"/>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_11"/>
+  <buttongroup name="buttonGroup_13"/>
  </buttongroups>
 </ui>

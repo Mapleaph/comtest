@@ -26,7 +26,12 @@ FORMS    += mainwindow.ui \
     configdialog.ui
 
 RESOURCES += \
-    icon.qrc
+    res.qrc
 
 RC_FILE = res.rc
 
+ICON = icon.icns
+
+VERSION = 2.2.0.1
+
+TRANSLATIONS = cn.ts

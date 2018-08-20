@@ -9,6 +9,8 @@
 #include <QFileInfo>
 #include <QCoreApplication>
 #include <QDebug>
+#include <QMenuBar>
+#include <QMenu>
 
 int configured_flag = 0;
 QByteArray tmparr[8];
@@ -48,8 +50,43 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
+
+    if (QSysInfo::productType() == "windows") {
+
+        action[0] = new QAction(tr("Configuration"), this);
+        action[1] = new QAction(tr("About"), this);
+
+        ui->menuBar->addAction(action[0]);
+        ui->menuBar->addAction(action[1]);
+
+        connect(action[1], SIGNAL(triggered(bool)), this, SLOT(on_actionAbout_triggered()));
+        connect(action[0], SIGNAL(triggered(bool)), this, SLOT(on_actionPreferences_triggered()));
+
+    } else if (QSysInfo::productType() == "osx") {
+
+        menu[0] = new QMenu(tr("ComTest"));
+        action[0] = new QAction(tr("About"), this);
+        action[1] = new QAction(tr("Preferences"), this);
+
+        menu[0]->addAction(action[0]);
+        menu[0]->addAction(action[1]);
+        ui->menuBar->addMenu(menu[0]);
+
+        connect(action[0], SIGNAL(triggered(bool)), this, SLOT(on_actionAbout_triggered()));
+        connect(action[1], SIGNAL(triggered(bool)), this, SLOT(on_actionPreferences_triggered()));
+    }
+
+
+//    ui->menuBar->addMenu(menu[1]);
+//    ui->menuBar->addMenu(menu[2]);
+
+    //menubar->setNativeMenuBar(true);
+    //menubar->setVisible(true);
+    //menubar->show();
+
+    QIcon icon(":/images/icon.icns");
+    setWindowIcon(icon);
 
     for (int i=0; i<PORT_NUM; i++) {
 
@@ -88,7 +125,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     localConfigData = (QStringList() << "0" << "0" << "0" << "0" << "0" << "0" << "0" << "0");
 
-    const QStringList baudRate = (QStringList() << "9600" << "19200" << "38400" << "57600" << "115200");
+    const QStringList baudRate = (QStringList() << "9600" << "19200" << "38400" << "57600" << "115200" << "Custom");
     const QStringList dataBits = (QStringList() << "5" << "6" << "7" << "8");
     const QStringList stopBits = (QStringList() << "1" << "1.5" << "2");
     const QStringList parity = (QStringList() << "None" << "Even" << "Odd" << "Mark" << "Space");
@@ -267,7 +304,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_btn_config_clicked()
+void MainWindow::configPort()
 {
 
     for (int i=0; i<PORT_NUM; i++) {
@@ -803,7 +840,8 @@ void MainWindow::on_btn_open_1_clicked()
 
     worker[0] = new MyWorker();
     worker[0]->setter(portName,
-                      baudRateLst[ui->comboBox_11->currentIndex()],
+                      //baudRateLst[ui->comboBox_11->currentIndex()],
+                      ui->comboBox_11->currentText().toLong(),
             dataBitsLst[ui->comboBox_12->currentIndex()],
             parityLst[ui->comboBox_13->currentIndex()],
             stopBitsLst[ui->comboBox_14->currentIndex()],
@@ -847,7 +885,7 @@ void MainWindow::on_btn_open_2_clicked()
 
     worker[1] = new MyWorker();
     worker[1]->setter(portName,
-                      baudRateLst[ui->comboBox_21->currentIndex()],
+                      ui->comboBox_21->currentText().toLong(),
             dataBitsLst[ui->comboBox_22->currentIndex()],
             parityLst[ui->comboBox_23->currentIndex()],
             stopBitsLst[ui->comboBox_24->currentIndex()],
@@ -892,7 +930,7 @@ void MainWindow::on_btn_open_3_clicked()
 
     worker[2] = new MyWorker();
     worker[2]->setter(portName,
-                      baudRateLst[ui->comboBox_31->currentIndex()],
+                      ui->comboBox_31->currentText().toLong(),
             dataBitsLst[ui->comboBox_32->currentIndex()],
             parityLst[ui->comboBox_33->currentIndex()],
             stopBitsLst[ui->comboBox_34->currentIndex()],
@@ -932,7 +970,7 @@ void MainWindow::on_btn_open_4_clicked()
 
     worker[3] = new MyWorker();
     worker[3]->setter(portName,
-                      baudRateLst[ui->comboBox_41->currentIndex()],
+                      ui->comboBox_41->currentText().toLong(),
             dataBitsLst[ui->comboBox_42->currentIndex()],
             parityLst[ui->comboBox_43->currentIndex()],
             stopBitsLst[ui->comboBox_44->currentIndex()],
@@ -972,7 +1010,7 @@ void MainWindow::on_btn_open_5_clicked()
 
     worker[4] = new MyWorker();
     worker[4]->setter(portName,
-                      baudRateLst[ui->comboBox_51->currentIndex()],
+                      ui->comboBox_51->currentText().toLong(),
             dataBitsLst[ui->comboBox_52->currentIndex()],
             parityLst[ui->comboBox_53->currentIndex()],
             stopBitsLst[ui->comboBox_54->currentIndex()],
@@ -1014,7 +1052,7 @@ void MainWindow::on_btn_open_6_clicked()
 
     worker[5] = new MyWorker();
     worker[5]->setter(portName,
-                      baudRateLst[ui->comboBox_61->currentIndex()],
+                      ui->comboBox_61->currentText().toLong(),
             dataBitsLst[ui->comboBox_62->currentIndex()],
             parityLst[ui->comboBox_63->currentIndex()],
             stopBitsLst[ui->comboBox_64->currentIndex()],
@@ -1057,7 +1095,7 @@ void MainWindow::on_btn_open_7_clicked()
 
     worker[6] = new MyWorker();
     worker[6]->setter(portName,
-                      baudRateLst[ui->comboBox_71->currentIndex()],
+                      ui->comboBox_71->currentText().toLong(),
             dataBitsLst[ui->comboBox_72->currentIndex()],
             parityLst[ui->comboBox_73->currentIndex()],
             stopBitsLst[ui->comboBox_74->currentIndex()],
@@ -1100,7 +1138,7 @@ void MainWindow::on_btn_open_8_clicked()
 
     worker[7] = new MyWorker();
     worker[7]->setter(portName,
-                      baudRateLst[ui->comboBox_81->currentIndex()],
+                      ui->comboBox_81->currentText().toLong(),
             dataBitsLst[ui->comboBox_82->currentIndex()],
             parityLst[ui->comboBox_83->currentIndex()],
             stopBitsLst[ui->comboBox_84->currentIndex()],
@@ -2321,5 +2359,65 @@ void MainWindow::limitCharsInTextEdit(const QTextEdit* textEdit, const int maxCh
         tc.setPosition(currentCount - (maxChars + 1), QTextCursor::KeepAnchor);
         tc.removeSelectedText();
         tc.movePosition( QTextCursor::End, QTextCursor::MoveAnchor );
+    }
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+}
+
+void MainWindow::on_actionPreferences_triggered()
+{
+    configPort();
+}
+
+void MainWindow::on_comboBox_11_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_11);
+}
+
+void MainWindow::on_comboBox_21_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_21);
+}
+
+void MainWindow::on_comboBox_31_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_31);
+}
+
+void MainWindow::on_comboBox_41_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_41);
+}
+
+void MainWindow::on_comboBox_51_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_51);
+}
+
+void MainWindow::on_comboBox_61_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_61);
+}
+
+void MainWindow::on_comboBox_71_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_71);
+}
+
+void MainWindow::on_comboBox_81_currentIndexChanged(const QString &arg1)
+{
+    on_comboBox_currentIndexChanged_internal(arg1, ui->comboBox_81);
+}
+
+void MainWindow::on_comboBox_currentIndexChanged_internal(const QString currentText, QComboBox *cb)
+{
+    if (currentText == "Custom") {
+        cb->setEditable(true);
+        cb->setCurrentText("");
+        cb->setFocus();
+    } else {
+        cb->setEditable(false);
     }
 }

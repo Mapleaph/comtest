@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>icon.ico</file>
+        <file>icon.icns</file>
+    </qresource>
+    <qresource prefix="/translators">
+        <file>cn.qm</file>
+    </qresource>
+</RCC>

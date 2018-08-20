@@ -11,6 +11,9 @@
 #include <QPushButton>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QMenuBar>
+#include <QMenu>
+#include <QAction>
 
 #define PORT_NUM 8
 #define MAXCHARS 10000
@@ -28,6 +31,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void intervalGen(int interval);
+    void on_comboBox_currentIndexChanged_internal(const QString currentText, QComboBox *cb);
     void updateReadDataUi(QRadioButton* btn, QByteArray readData, int *cnt, QTextEdit* edit, QLabel* label);
     void initIntervalSpinBox(QSpinBox* spinBox);
     void initPortUi(QPushButton* btnOpen,
@@ -168,7 +172,7 @@ private slots:
     void cannotOpenNotify7();
     void cannotOpenNotify8();
 
-    void on_btn_config_clicked();
+    void configPort();
     void recvConfigData(QStringList configData);
     void closeEvent(QCloseEvent*);
 
@@ -235,8 +239,21 @@ private slots:
     void on_btn_clr_81_clicked();
     void on_btn_clr_82_clicked();
 
-private:
+    void on_actionAbout_triggered();
+    void on_actionPreferences_triggered();
 
+    void on_comboBox_11_currentIndexChanged(const QString &arg1);
+    void on_comboBox_21_currentIndexChanged(const QString &arg1);
+    void on_comboBox_31_currentIndexChanged(const QString &arg1);
+    void on_comboBox_41_currentIndexChanged(const QString &arg1);
+    void on_comboBox_51_currentIndexChanged(const QString &arg1);
+    void on_comboBox_61_currentIndexChanged(const QString &arg1);
+    void on_comboBox_71_currentIndexChanged(const QString &arg1);
+    void on_comboBox_81_currentIndexChanged(const QString &arg1);
+
+private:
+    QMenu *menu[10];
+    QAction *action[10];
 
 };
 
