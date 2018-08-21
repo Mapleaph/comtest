@@ -15,23 +15,33 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     configdialog.cpp \
-    myworker.cpp
+    myworker.cpp \
+    about.cpp
 
 HEADERS  += mainwindow.h \
     configdialog.h \
     ser.h \
-    myworker.h
+    myworker.h \
+    about.h
 
 FORMS    += mainwindow.ui \
-    configdialog.ui
+    configdialog.ui \
+    about.ui
 
 RESOURCES += \
     res.qrc
 
-RC_FILE = res.rc
-
 ICON = icon.icns
 
-VERSION = 2.2.0.2
+RC_ICONS = icon.ico
 
-TRANSLATIONS = cn.ts
+VERSION = 2.2.1.3
+
+QMAKE_TARGET_DESCRIPTION = "Serial Port Test Tool"
+
+DEFINES += VERSION_STRING=\\\"$$VERSION\\\"
+
+DEFINES += BUILD_DATE_STRING=\\\"20180821\\\"
+
+TRANSLATIONS += cn.ts \
+                en.ts

@@ -378,7 +378,7 @@
         <location filename="mainwindow.cpp" line="62"/>
         <location filename="mainwindow.cpp" line="73"/>
         <source>About</source>
-        <translation>关于</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="3578"/>
@@ -389,7 +389,7 @@
     <message>
         <location filename="mainwindow.cpp" line="61"/>
         <source>Configuration</source>
-        <translation>配置</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="72"/>

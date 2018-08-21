@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <QMenuBar>
 #include <QMenu>
+#include <QLocale>
+#include <QtCore>
 
 int configured_flag = 0;
 QByteArray tmparr[8];
@@ -51,6 +53,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
 
     if (QSysInfo::productType() == "windows") {
 
@@ -2364,6 +2368,10 @@ void MainWindow::limitCharsInTextEdit(const QTextEdit* textEdit, const int maxCh
 
 void MainWindow::on_actionAbout_triggered()
 {
+
+    about = About::getInstance();
+    about->show();
+    about->activateWindow();
 }
 
 void MainWindow::on_actionPreferences_triggered()

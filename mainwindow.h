@@ -14,6 +14,7 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
+#include <about.h>
 
 #define PORT_NUM 8
 #define MAXCHARS 10000
@@ -254,6 +255,7 @@ private slots:
 private:
     QMenu *menu[10];
     QAction *action[10];
+    About *about;
 
 };
 

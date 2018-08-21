@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QTranslator>
+#include <QLocale>
 
 int main(int argc, char *argv[])
 {
@@ -8,7 +9,18 @@ int main(int argc, char *argv[])
 
     QTranslator t;
 
-    t.load("cn.qm", ":/translators");
+    QLocale *lc = new QLocale();
+
+    if (lc->languageToString(lc->language()) == "English") {
+
+        t.load("en.qm", ":/translators");
+
+
+    } else if (lc->languageToString(lc->language()) == "Chinese") {
+
+        t.load("cn.qm", ":/translators");
+
+    }
 
     a.installTranslator(&t);
 
