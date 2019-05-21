@@ -21,11 +21,15 @@ public:
                 QSerialPort::FlowControl flowCtrl);
 
     void intervalGen(int interval);
+#ifdef Q_OS_WIN
+    void intervalGenUs(int interval);
+#endif
     QSerialPort* port;
     bool continueFlag;
+    bool isOpened();
 
 private slots:
-    void doOpen();
+    void doOpen(QString portName);
     void readPort();
     void doSend(QString str, bool isHex, int sendCnt);
     void doClose();
@@ -46,6 +50,7 @@ private:
     QSerialPort::StopBits stopBits;
     QSerialPort::Parity parity;
     QSerialPort::FlowControl flowCtrl;
+    bool openFlag;
 
 };
 

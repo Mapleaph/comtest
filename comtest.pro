@@ -35,13 +35,13 @@ ICON = icon.icns
 
 RC_ICONS = icon.ico
 
-VERSION = 2.2.1.3
+VERSION = 3.0.0.1s
 
 QMAKE_TARGET_DESCRIPTION = "Serial Port Test Tool"
 
 DEFINES += VERSION_STRING=\\\"$$VERSION\\\"
 
-DEFINES += BUILD_DATE_STRING=\\\"20180821\\\"
+DEFINES += BUILD_DATE_STRING=\\\"20190521\\\"
 
 TRANSLATIONS += cn.ts \
                 en.ts

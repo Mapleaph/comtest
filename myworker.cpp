@@ -8,9 +8,14 @@
 #include <QTimer>
 #include <math.h>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 MyWorker::MyWorker()
 {
     continueFlag = false;
+    openFlag = false;
 }
 
 MyWorker::~MyWorker()
@@ -18,7 +23,7 @@ MyWorker::~MyWorker()
 
 }
 
-void MyWorker::doOpen()
+void MyWorker::doOpen(QString portName)
 {
     qDebug() << "doOpen";
 
@@ -33,6 +38,7 @@ void MyWorker::doOpen()
     if (port->open(QIODevice::ReadWrite)) {
 
         emit sigOpened();
+        openFlag = true;
         connect(port, SIGNAL(readyRead()), this, SLOT(readPort()));
 
     } else {
@@ -125,9 +131,16 @@ void MyWorker::doContinueSend(QString str, int interval, int sendCnt, bool isHex
 
         }
 
+        // wait for all the bytes written before next write
+        // -1 means wait forever.
+        port->waitForBytesWritten(-1);
         emit sigUpdateSendCnt(sendCnt);
-        intervalGen(interval);
 
+#ifdef Q_OS_WIN
+        intervalGenUs(interval);
+#else
+        intervalGen(interval);
+#endif
     }
 
 }
@@ -137,6 +150,38 @@ void MyWorker::intervalGen(int interval)
     QEventLoop loop;
     QTimer::singleShot(interval, &loop, SLOT(quit()));
     loop.exec();
+}
+
+#ifdef Q_OS_WIN
+void MyWorker::intervalGenUs(int interval)
+{
+    LARGE_INTEGER litmp;
+    LONGLONG QPart1, QPart2;
+    double dfMinus, dfFreq, dfTim;
+
+    if (interval < 1) {
+        return;
+    }
+
+    QueryPerformanceFrequency(&litmp);
+    dfFreq = (double)litmp.QuadPart;
+
+    QueryPerformanceCounter(&litmp);
+    QPart1 = litmp.QuadPart;
+
+    do {
+        QueryPerformanceCounter(&litmp);
+        QPart2 = litmp.QuadPart;
+        dfMinus = (double)(QPart2-QPart1);
+        dfTim = dfMinus * 1000000 / dfFreq;
+
+    } while (dfTim < interval);
+}
+#endif
+
+bool MyWorker::isOpened()
+{
+    return openFlag;
 }
 
 void MyWorker::setter(QString portName,
@@ -164,16 +209,19 @@ void MyWorker::readPort()
 
 void MyWorker::doClose()
 {
+    qDebug() << "doClose";
+
     if (port != NULL && port->isOpen()) {
 
         port->close();
+        openFlag = false;
 
     }
 
     if (port != NULL) {
 
-        emit sigExitThread();
+        //emit sigExitThread();
 
     }
-    qDebug() << "close";
+
 }
